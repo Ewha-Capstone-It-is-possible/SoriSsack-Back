@@ -16,9 +16,10 @@ async def recommend_words(payload: RecommendationRequest, db: Session = Depends(
     if baby is None:
         raise HTTPException(status_code=404, detail="아동 정보를 찾을 수 없습니다.")
 
-    baby_card = db.get(BabyCard, payload.selected_baby_card_id)
-    if baby_card is None or baby_card.baby_id != payload.baby_id:
-        raise HTTPException(status_code=404, detail="선택한 아동 카드를 찾을 수 없습니다.")
+    if payload.selected_baby_card_id is not None:
+        baby_card = db.get(BabyCard, payload.selected_baby_card_id)
+        if baby_card is None or baby_card.baby_id != payload.baby_id:
+            raise HTTPException(status_code=404, detail="선택한 아동 카드를 찾을 수 없습니다.")
 
     result = await fetch_recommendations(payload)
     return SuccessResponse(

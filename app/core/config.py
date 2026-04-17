@@ -1,6 +1,10 @@
 from dataclasses import dataclass
 import os
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 def _as_bool(value: str, default: bool) -> bool:
     if value is None:
