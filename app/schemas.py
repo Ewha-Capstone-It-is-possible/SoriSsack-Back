@@ -24,11 +24,9 @@ class BabyOut(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
     baby_id: int
-    name: str
-    age: int
-    development_stage: Optional[str] = None
-    preferred_tts_voice: Optional[str] = None
-    preferred_tts_speed: Optional[float] = None
+    baby_name: str
+    sex: str
+    birth: datetime
     created_at: datetime
     updated_at: datetime
 
@@ -47,7 +45,7 @@ class CardOut(BaseModel):
 
 class RecommendationRequest(BaseModel):
     baby_id: int
-    selected_baby_card_id: int
+    selected_baby_card_id: Optional[int] = None
 
 
 class RecommendedWord(BaseModel):
@@ -55,12 +53,12 @@ class RecommendedWord(BaseModel):
     card_id: Optional[int] = None
     text: str
     pos: Optional[str] = None
-    system_score: Optional[float] = None
+    system_score: float
 
 
 class RecommendationResult(BaseModel):
     baby_id: int
-    selected_word: str
+    selected_word: Optional[str] = None
     recommended_words: list[RecommendedWord]
 
 
@@ -68,9 +66,8 @@ class CreateSentenceRequest(BaseModel):
     baby_id: int
     sentence_text: str = Field(..., min_length=1)
     played_tts: bool = False
-    audio_url: Optional[str] = None
-    image_url: Optional[str] = None
-    avatar_video_url: Optional[str] = None
+    avatar_image_url: Optional[str] = None
+    avatar_audio_url: Optional[str] = None
 
 
 class SentenceOut(BaseModel):
@@ -80,9 +77,8 @@ class SentenceOut(BaseModel):
     baby_id: int
     sentence_text: str
     played_tts: bool
-    audio_url: Optional[str] = None
-    image_url: Optional[str] = None
-    avatar_video_url: Optional[str] = None
+    avatar_image_url: Optional[str] = None
+    avatar_audio_url: Optional[str] = None
     created_at: datetime
 
 
@@ -90,7 +86,7 @@ class CreateVocabLogRequest(BaseModel):
     baby_id: int
     baby_card_id: Optional[int] = None
     card_id: Optional[int] = None
-    text: str = Field(..., min_length=1)
+    text_snapshot: str = Field(..., min_length=1)
     context_json: Optional[dict[str, Any]] = None
     used_at: datetime
 
@@ -102,7 +98,7 @@ class VocabLogOut(BaseModel):
     baby_id: int
     baby_card_id: Optional[int] = None
     card_id: Optional[int] = None
-    text: str
+    text_snapshot: str
     context_json: Optional[dict[str, Any]] = None
     used_at: datetime
     created_at: datetime
