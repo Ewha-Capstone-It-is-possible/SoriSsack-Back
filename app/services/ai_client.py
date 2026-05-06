@@ -16,7 +16,7 @@ async def fetch_recommendations(payload: RecommendationRequest) -> Recommendatio
             ],
         )
 
-    async with httpx.AsyncClient(timeout=10.0) as client:
+    async with httpx.AsyncClient(timeout=30.0) as client:
         response = await client.post(
             f"{settings.ai_server_url}/recommend",
             json=payload.model_dump(),
