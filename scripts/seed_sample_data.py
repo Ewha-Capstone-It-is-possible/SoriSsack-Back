@@ -8,32 +8,30 @@ def seed():
     Base.metadata.create_all(bind=engine)
     db = SessionLocal()
 
-    existing_baby = db.query(BabyBasicInformation).filter(BabyBasicInformation.baby_id == 1).first()
+    existing_baby = db.query(BabyBasicInformation).filter(BabyBasicInformation.baby_id == 3).first()
     if existing_baby:
         db.close()
         return
 
     baby = BabyBasicInformation(
-        baby_id=1,
-        name="민수",
-        age=7,
-        development_stage="초기 문장 단계",
-        preferred_tts_voice="female",
-        preferred_tts_speed=1.0,
+        baby_id=3,
+        baby_name="민준",
+        sex="M",
+        birth=datetime(2022, 6, 15),
     )
 
     card_1 = CardMaster(
         card_id=1,
         base_text="사과",
         normalized_text="사과",
-        part_of_speech="Noun",
+        part_of_speech="noun",
         default_image_url=None,
     )
     card_2 = CardMaster(
         card_id=2,
         base_text="물",
         normalized_text="물",
-        part_of_speech="Noun",
+        part_of_speech="noun",
         default_image_url=None,
     )
     card_3 = CardMaster(
@@ -46,10 +44,10 @@ def seed():
 
     baby_card_1 = BabyCard(
         baby_card_id=101,
-        baby_id=1,
+        baby_id=3,
         card_id=1,
         text=None,
-        type=None,
+        part_of_speech=None,
         custom_image_url=None,
         is_favorite=True,
         source="system_default",
