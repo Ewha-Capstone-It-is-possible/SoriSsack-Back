@@ -40,6 +40,7 @@ class CardMaster(Base):
 
     baby_cards = relationship("BabyCard", back_populates="card_master")
     vocab_logs = relationship("BabyVocabLog", back_populates="card_master")
+    category_maps = relationship("CardCategoryMapMaster", back_populates="card_master")
 
 
 class BabyCard(Base):
@@ -65,6 +66,80 @@ class BabyCard(Base):
     baby = relationship("BabyBasicInformation", back_populates="baby_cards")
     card_master = relationship("CardMaster", back_populates="baby_cards")
     vocab_logs = relationship("BabyVocabLog", back_populates="baby_card")
+    category_maps = relationship("BabyCardCategoryMap", back_populates="baby_card")
+
+
+class CategoryMaster(Base):
+    __tablename__ = "category_master"
+
+    category_id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    name: Mapped[str] = mapped_column(String(100), nullable=False)
+    description: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
+    icon_url: Mapped[Optional[str]] = mapped_column(String(500), nullable=True)
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False
+    )
+
+    baby_categories = relationship("BabyCategory", back_populates="category_master")
+    card_maps = relationship("CardCategoryMapMaster", back_populates="category_master")
+
+
+class CardCategoryMapMaster(Base):
+    __tablename__ = "card_category_map_master"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    card_id: Mapped[int] = mapped_column(ForeignKey("card_master.card_id"), nullable=False, index=True)
+    category_id: Mapped[int] = mapped_column(ForeignKey("category_master.category_id"), nullable=False, index=True)
+    is_primary: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False
+    )
+
+    card_master = relationship("CardMaster", back_populates="category_maps")
+    category_master = relationship("CategoryMaster", back_populates="card_maps")
+
+
+class BabyCategory(Base):
+    __tablename__ = "baby_category"
+
+    baby_category_id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    baby_id: Mapped[int] = mapped_column(ForeignKey("baby_basic_information.baby_id"), nullable=False, index=True)
+    category_id: Mapped[Optional[int]] = mapped_column(
+        ForeignKey("category_master.category_id"), nullable=True, index=True
+    )
+    name: Mapped[str] = mapped_column(String(100), nullable=False)
+    icon_url: Mapped[Optional[str]] = mapped_column(String(500), nullable=True)
+    is_enabled: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
+    is_favorite: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    priority: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+    system_score: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+    manual_order: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False
+    )
+
+    category_master = relationship("CategoryMaster", back_populates="baby_categories")
+    card_maps = relationship("BabyCardCategoryMap", back_populates="baby_category")
+
+
+class BabyCardCategoryMap(Base):
+    __tablename__ = "baby_card_category_map"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    baby_id: Mapped[int] = mapped_column(ForeignKey("baby_basic_information.baby_id"), nullable=False, index=True)
+    baby_card_id: Mapped[int] = mapped_column(ForeignKey("baby_card.baby_card_id"), nullable=False, index=True)
+    baby_category_id: Mapped[int] = mapped_column(
+        ForeignKey("baby_category.baby_category_id"), nullable=False, index=True
+    )
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+
+    baby_card = relationship("BabyCard", back_populates="category_maps")
+    baby_category = relationship("BabyCategory", back_populates="card_maps")
 
 
 class BabyVocabLog(Base):

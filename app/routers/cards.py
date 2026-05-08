@@ -2,8 +2,15 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app.db import get_db
-from app.models import BabyBasicInformation, BabyCard, CardMaster
-from app.schemas import CardOut, SuccessResponse
+from app.models import (
+    BabyBasicInformation,
+    BabyCard,
+    BabyCardCategoryMap,
+    BabyCategory,
+    CardCategoryMapMaster,
+    CardMaster,
+)
+from app.schemas import CardCategoryOut, CardOut, SuccessResponse
 
 
 router = APIRouter(prefix="/cards", tags=["cards"])
@@ -31,7 +38,64 @@ def get_cards(baby_id: int, db: Session = Depends(get_db)):
 
     result: list[CardOut] = []
 
+    baby_category_rows = (
+        db.query(BabyCategory)
+        .filter(BabyCategory.baby_id == baby_id, BabyCategory.is_enabled.is_(True))
+        .all()
+    )
+    baby_category_by_id = {row.baby_category_id: row for row in baby_category_rows}
+    baby_category_by_master_id = {
+        row.category_id: row for row in baby_category_rows if row.category_id is not None
+    }
+
+    baby_card_category_maps = (
+        db.query(BabyCardCategoryMap)
+        .filter(BabyCardCategoryMap.baby_id == baby_id)
+        .all()
+    )
+    baby_card_categories_by_card_id: dict[int, list[CardCategoryOut]] = {}
+    for category_map in baby_card_category_maps:
+        baby_category = baby_category_by_id.get(category_map.baby_category_id)
+        if baby_category is None:
+            continue
+        baby_card_categories_by_card_id.setdefault(category_map.baby_card_id, []).append(
+            CardCategoryOut(
+                baby_category_id=baby_category.baby_category_id,
+                category_id=baby_category.category_id,
+                name=baby_category.name,
+                icon_url=baby_category.icon_url,
+            )
+        )
+
+    master_card_category_maps = (
+        db.query(CardCategoryMapMaster)
+        .filter(CardCategoryMapMaster.is_active.is_(True))
+        .all()
+    )
+    master_card_categories_by_card_id: dict[int, list[tuple[bool, CardCategoryOut]]] = {}
+    for category_map in master_card_category_maps:
+        baby_category = baby_category_by_master_id.get(category_map.category_id)
+        if baby_category is not None:
+            category = CardCategoryOut(
+                baby_category_id=baby_category.baby_category_id,
+                category_id=baby_category.category_id,
+                name=baby_category.name,
+                icon_url=baby_category.icon_url,
+            )
+        elif category_map.category_master is not None:
+            category = CardCategoryOut(
+                baby_category_id=None,
+                category_id=category_map.category_master.category_id,
+                name=category_map.category_master.name,
+                icon_url=category_map.category_master.icon_url,
+            )
+        else:
+            continue
+
+        master_card_categories_by_card_id.setdefault(category_map.card_id, []).append((category_map.is_primary, category))
+
     for card in baby_cards:
+        category = next(iter(baby_card_categories_by_card_id.get(card.baby_card_id, [])), None)
         result.append(
             CardOut(
                 baby_card_id=card.baby_card_id,
@@ -43,10 +107,15 @@ def get_cards(baby_id: int, db: Session = Depends(get_db)):
                 source=card.source,
                 status=card.status,
                 usage_count=card.usage_count,
+                category=category,
             )
         )
 
     for card in master_cards:
+        category_candidates = [category for _, category in sorted(
+            master_card_categories_by_card_id.get(card.card_id, []),
+            key=lambda item: (not item[0], item[1].name),
+        )]
         result.append(
             CardOut(
                 baby_card_id=None,
@@ -58,6 +127,7 @@ def get_cards(baby_id: int, db: Session = Depends(get_db)):
                 source="system_default",
                 status="default",
                 usage_count=0,
+                category=category_candidates[0] if category_candidates else None,
             )
         )
 
