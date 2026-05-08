@@ -2,7 +2,7 @@
 
 > **Base URL**: `http://localhost:8000/api/v1`
 > **Version**: 1.0.0
-> **Last Updated**: 2026-04-17
+> **Last Updated**: 2026-05-08
 
 ---
 
@@ -144,8 +144,14 @@
       "image_url": "https://example.com/images/water.png",
       "is_favorite": true,
       "source": "system_default",
-      "status": "active",
-      "usage_count": 15
+      "status": "default",
+      "usage_count": 15,
+      "category": {
+        "baby_category_id": 21,
+        "category_id": 3,
+        "name": "음식/음료",
+        "icon_url": "https://example.com/icons/food.png"
+      }
     },
     {
       "baby_card_id": 502,
@@ -154,9 +160,15 @@
       "part_of_speech": "noun",
       "image_url": "https://example.com/images/custom.png",
       "is_favorite": false,
-      "source": "parent_custom",
-      "status": "active",
-      "usage_count": 3
+      "source": "parent_manual",
+      "status": "add",
+      "usage_count": 3,
+      "category": {
+        "baby_category_id": 28,
+        "category_id": null,
+        "name": "생활",
+        "icon_url": "https://example.com/icons/life.png"
+      }
     },
     {
       "baby_card_id": null,
@@ -167,7 +179,13 @@
       "is_favorite": false,
       "source": "system_default",
       "status": "default",
-      "usage_count": 0
+      "usage_count": 0,
+      "category": {
+        "baby_category_id": 12,
+        "category_id": 7,
+        "name": "놀이",
+        "icon_url": "https://example.com/icons/play.png"
+      }
     }
   ],
   "message": "카드 목록을 조회했습니다."
@@ -184,9 +202,19 @@
 | `part_of_speech` | `string \| null` | 품사 (`"noun"`, `"verb"`, `"adjective"`) |
 | `image_url` | `string \| null` | 카드 이미지 URL |
 | `is_favorite` | `boolean` | 즐겨찾기 여부 |
-| `source` | `string` | 카드 출처 (`"system_default"`, `"parent_custom"`) |
-| `status` | `string` | 상태 (`"active"`, `"default"`, `"off"`) |
+| `source` | `string` | 카드 출처 (`"system_default"`, `"parent_manual"`, `"onboarding"`, `"ai_recommend_selected"`) |
+| `status` | `string` | 상태 (`"default"`, `"modified"`, `"off"`, `"add"`) |
 | `usage_count` | `int` | 사용 횟수 |
+| `category` | `object \| null` | 카드가 속한 카테고리 정보 |
+
+### `category` 필드
+
+| 필드 | 타입 | 설명 |
+|------|------|------|
+| `baby_category_id` | `int \| null` | 아동별 카테고리 ID |
+| `category_id` | `int \| null` | 공용 카테고리 ID |
+| `name` | `string` | 카테고리명 |
+| `icon_url` | `string \| null` | 카테고리 아이콘 URL |
 
 ### 카드 타입 판별
 
