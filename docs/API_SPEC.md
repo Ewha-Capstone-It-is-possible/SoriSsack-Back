@@ -12,7 +12,9 @@
 2. [헬스 체크](#1-헬스-체크)
 3. [아동 정보 조회](#2-아동-정보-조회)
 4. [카드 목록 조회](#3-카드-목록-조회)
-5. [단어 추천](#4-단어-추천)
+5. [카테고리 목록 조회](#3-1-카테고리-목록-조회)
+6. [카테고리별 카드 조회](#3-2-카테고리별-카드-조회)
+7. [단어 추천](#4-단어-추천)
 6. [문장 표현 저장](#5-문장-표현-저장)
 7. [단어 사용 로그 저장](#6-단어-사용-로그-저장)
 8. [에러 응답](#에러-응답)
@@ -146,12 +148,8 @@
       "source": "system_default",
       "status": "default",
       "usage_count": 15,
-      "category": {
-        "baby_category_id": 21,
-        "category_id": 3,
-        "name": "음식/음료",
-        "icon_url": "https://example.com/icons/food.png"
-      }
+      "category": "음식",
+      "baby_category_id": 5
     },
     {
       "baby_card_id": 502,
@@ -163,12 +161,8 @@
       "source": "parent_manual",
       "status": "add",
       "usage_count": 3,
-      "category": {
-        "baby_category_id": 28,
-        "category_id": null,
-        "name": "생활",
-        "icon_url": "https://example.com/icons/life.png"
-      }
+      "category": "생활",
+      "baby_category_id": 28
     },
     {
       "baby_card_id": null,
@@ -180,12 +174,8 @@
       "source": "system_default",
       "status": "default",
       "usage_count": 0,
-      "category": {
-        "baby_category_id": 12,
-        "category_id": 7,
-        "name": "놀이",
-        "icon_url": "https://example.com/icons/play.png"
-      }
+      "category": "물건",
+      "baby_category_id": 3
     }
   ],
   "message": "카드 목록을 조회했습니다."
@@ -205,16 +195,8 @@
 | `source` | `string` | 카드 출처 (`"system_default"`, `"parent_manual"`, `"onboarding"`, `"ai_recommend_selected"`) |
 | `status` | `string` | 상태 (`"default"`, `"modified"`, `"off"`, `"add"`) |
 | `usage_count` | `int` | 사용 횟수 |
-| `category` | `object \| null` | 카드가 속한 카테고리 정보 |
-
-### `category` 필드
-
-| 필드 | 타입 | 설명 |
-|------|------|------|
-| `baby_category_id` | `int \| null` | 아동별 카테고리 ID |
-| `category_id` | `int \| null` | 공용 카테고리 ID |
-| `name` | `string` | 카테고리명 |
-| `icon_url` | `string \| null` | 카테고리 아이콘 URL |
+| `category` | `string \| null` | 카테고리 이름 (예: `"음식"`, `"가족"`, `"감정"`, `"활동"`, `"장소"`, `"물건"`) |
+| `baby_category_id` | `int \| null` | 아동별 카테고리 ID. `/categories/{baby_id}/{baby_category_id}/cards` 호출 시 사용 |
 
 ### 카드 타입 판별
 
@@ -223,6 +205,81 @@
 | 값 있음 | 값 있음 | 아동에게 할당된 기본 카드 |
 | 값 있음 | `null` | 부모가 직접 추가한 커스텀 카드 |
 | `null` | 값 있음 | 아직 할당 안 된 기본 카드 |
+
+---
+
+## 3-1. 카테고리 목록 조회
+
+아동에게 활성화된 카테고리(가족/음식/감정/활동/장소/물건 등) 목록을 반환합니다.
+
+| 항목 | 값 |
+|------|------|
+| **Method** | `GET` |
+| **URL** | `/api/v1/categories/{baby_id}` |
+
+### Response
+
+```json
+{
+  "success": true,
+  "data": [
+    { "baby_category_id": 2, "category_id": 2, "name": "가족", "icon_url": null, "is_enabled": true, "is_favorite": false },
+    { "baby_category_id": 5, "category_id": 5, "name": "음식", "icon_url": null, "is_enabled": true, "is_favorite": false },
+    { "baby_category_id": 1, "category_id": 1, "name": "감정", "icon_url": null, "is_enabled": true, "is_favorite": false },
+    { "baby_category_id": 6, "category_id": 6, "name": "활동", "icon_url": null, "is_enabled": true, "is_favorite": false },
+    { "baby_category_id": 4, "category_id": 4, "name": "장소", "icon_url": null, "is_enabled": true, "is_favorite": false },
+    { "baby_category_id": 3, "category_id": 3, "name": "물건", "icon_url": null, "is_enabled": true, "is_favorite": false }
+  ],
+  "message": "카테고리 목록을 조회했습니다."
+}
+```
+
+### Response 필드
+
+| 필드 | 타입 | 설명 |
+|------|------|------|
+| `baby_category_id` | `int` | 아동별 카테고리 ID. `/categories/{baby_id}/{baby_category_id}/cards` 호출에 사용 |
+| `category_id` | `int \| null` | 공용 카테고리 ID |
+| `name` | `string` | 카테고리명 |
+| `icon_url` | `string \| null` | 카테고리 아이콘 |
+| `is_enabled` | `boolean` | 노출 여부 |
+| `is_favorite` | `boolean` | 즐겨찾기 카테고리 여부 |
+
+---
+
+## 3-2. 카테고리별 카드 조회
+
+특정 카테고리에 속한 카드 목록을 반환합니다. 개인 카드(`baby_card`) 우선, 부족분은 기본 카드(`card_master`)로 자동 보충.
+
+| 항목 | 값 |
+|------|------|
+| **Method** | `GET` |
+| **URL** | `/api/v1/categories/{baby_id}/{baby_category_id}/cards` |
+
+### Response
+
+```json
+{
+  "success": true,
+  "data": {
+    "baby_category_id": 5,
+    "category_name": "음식",
+    "cards": [
+      { "baby_card_id": 7,  "card_id": 21, "text": "사과",   "is_favorite": true,  "status": "default", "source": "system_default", "category": "음식", "baby_category_id": 5 },
+      { "baby_card_id": 8,  "card_id": 11, "text": "물",     "is_favorite": true,  "status": "default", "source": "system_default", "category": "음식", "baby_category_id": 5 },
+      { "baby_card_id": 15, "card_id": 67, "text": "피크닉", "is_favorite": false, "status": "add",     "source": "parent_manual",  "category": "음식", "baby_category_id": 5 },
+      { "baby_card_id": null, "card_id": 12, "text": "밥",   "is_favorite": false, "status": "default", "source": "system_default", "category": "음식", "baby_category_id": 5 }
+    ]
+  },
+  "message": "카테고리 카드 목록을 조회했습니다."
+}
+```
+
+### 응답 처리 가이드
+
+- `data.cards[]` 각 항목은 `/cards/{baby_id}` 응답의 카드 객체와 동일한 스키마
+- `is_favorite=true`로 즐겨찾기 정렬 가능
+- `status="add"`는 부모가 단어 추가로 등록한 카드 (예: 뽀로로, 피크닉)
 
 ---
 

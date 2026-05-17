@@ -31,13 +31,6 @@ class BabyOut(BaseModel):
     updated_at: datetime
 
 
-class CardCategoryOut(BaseModel):
-    baby_category_id: Optional[int] = None
-    category_id: Optional[int] = None
-    name: str
-    icon_url: Optional[str] = None
-
-
 class CardOut(BaseModel):
     baby_card_id: Optional[int] = None
     card_id: Optional[int] = None
@@ -48,7 +41,23 @@ class CardOut(BaseModel):
     source: str
     status: str
     usage_count: int = 0
-    category: Optional[CardCategoryOut] = None
+    category: Optional[str] = None
+    baby_category_id: Optional[int] = None
+
+
+class CategoryOut(BaseModel):
+    baby_category_id: int
+    category_id: Optional[int] = None
+    name: str
+    icon_url: Optional[str] = None
+    is_enabled: bool = True
+    is_favorite: bool = False
+
+
+class CategoryCardsOut(BaseModel):
+    baby_category_id: int
+    category_name: str
+    cards: list["CardOut"]
 
 
 class RecommendationRequest(BaseModel):

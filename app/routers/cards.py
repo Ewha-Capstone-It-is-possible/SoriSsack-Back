@@ -9,8 +9,9 @@ from app.models import (
     BabyCategory,
     CardCategoryMapMaster,
     CardMaster,
+    CategoryMaster,
 )
-from app.schemas import CardCategoryOut, CardOut, SuccessResponse
+from app.schemas import CardOut, SuccessResponse
 
 
 router = APIRouter(prefix="/cards", tags=["cards"])
@@ -28,74 +29,66 @@ def get_cards(baby_id: int, db: Session = Depends(get_db)):
         .all()
     )
 
-    overridden_card_ids = {card.card_id for card in baby_cards if card.card_id is not None}
-    master_cards = (
-        db.query(CardMaster)
-        .filter(CardMaster.is_active.is_(True))
-        .filter(~CardMaster.card_id.in_(overridden_card_ids) if overridden_card_ids else True)
-        .all()
-    )
+    overridden_card_ids = {c.card_id for c in baby_cards if c.card_id is not None}
+    master_q = db.query(CardMaster).filter(CardMaster.is_active.is_(True))
+    if overridden_card_ids:
+        master_q = master_q.filter(~CardMaster.card_id.in_(overridden_card_ids))
+    master_cards = master_q.all()
 
-    result: list[CardOut] = []
-
-    baby_category_rows = (
-        db.query(BabyCategory)
-        .filter(BabyCategory.baby_id == baby_id, BabyCategory.is_enabled.is_(True))
-        .all()
-    )
-    baby_category_by_id = {row.baby_category_id: row for row in baby_category_rows}
-    baby_category_by_master_id = {
-        row.category_id: row for row in baby_category_rows if row.category_id is not None
-    }
-
-    baby_card_category_maps = (
-        db.query(BabyCardCategoryMap)
+    # baby_card_id -> (baby_category_id, name)
+    bc_cat_rows = (
+        db.query(
+            BabyCardCategoryMap.baby_card_id,
+            BabyCategory.baby_category_id,
+            BabyCategory.name,
+        )
+        .join(BabyCategory, BabyCategory.baby_category_id == BabyCardCategoryMap.baby_category_id)
         .filter(BabyCardCategoryMap.baby_id == baby_id)
         .all()
     )
-    baby_card_categories_by_card_id: dict[int, list[CardCategoryOut]] = {}
-    for category_map in baby_card_category_maps:
-        baby_category = baby_category_by_id.get(category_map.baby_category_id)
-        if baby_category is None:
-            continue
-        baby_card_categories_by_card_id.setdefault(category_map.baby_card_id, []).append(
-            CardCategoryOut(
-                baby_category_id=baby_category.baby_category_id,
-                category_id=baby_category.category_id,
-                name=baby_category.name,
-                icon_url=baby_category.icon_url,
-            )
-        )
+    bc_cat_by_bcid: dict[int, tuple[int, str]] = {
+        r.baby_card_id: (r.baby_category_id, r.name) for r in bc_cat_rows
+    }
 
-    master_card_category_maps = (
-        db.query(CardCategoryMapMaster)
+    # 아동에게 활성화된 카테고리 (마스터 카드 fallback 시 baby_category_id 매핑용)
+    baby_category_by_master_id: dict[int, tuple[int, str]] = {
+        r.category_id: (r.baby_category_id, r.name)
+        for r in db.query(BabyCategory).filter(
+            BabyCategory.baby_id == baby_id, BabyCategory.is_enabled.is_(True)
+        )
+        if r.category_id is not None
+    }
+
+    # card_id -> (baby_category_id|None, category_name)  from card_master mapping
+    master_cat_rows = (
+        db.query(
+            CardCategoryMapMaster.card_id,
+            CategoryMaster.category_id,
+            CategoryMaster.name,
+            CardCategoryMapMaster.is_primary,
+        )
+        .join(CategoryMaster, CategoryMaster.category_id == CardCategoryMapMaster.category_id)
         .filter(CardCategoryMapMaster.is_active.is_(True))
         .all()
     )
-    master_card_categories_by_card_id: dict[int, list[tuple[bool, CardCategoryOut]]] = {}
-    for category_map in master_card_category_maps:
-        baby_category = baby_category_by_master_id.get(category_map.category_id)
-        if baby_category is not None:
-            category = CardCategoryOut(
-                baby_category_id=baby_category.baby_category_id,
-                category_id=baby_category.category_id,
-                name=baby_category.name,
-                icon_url=baby_category.icon_url,
-            )
-        elif category_map.category_master is not None:
-            category = CardCategoryOut(
-                baby_category_id=None,
-                category_id=category_map.category_master.category_id,
-                name=category_map.category_master.name,
-                icon_url=category_map.category_master.icon_url,
-            )
-        else:
+    master_cat_by_cid: dict[int, tuple[int | None, str]] = {}
+    for row in master_cat_rows:
+        # is_primary 우선 (현재 시드는 카드당 카테고리 1개라 단순 setdefault로 충분)
+        if row.card_id in master_cat_by_cid and not row.is_primary:
             continue
+        bcat = baby_category_by_master_id.get(row.category_id)
+        master_cat_by_cid[row.card_id] = (
+            (bcat[0] if bcat else None),
+            bcat[1] if bcat else row.name,
+        )
 
-        master_card_categories_by_card_id.setdefault(category_map.card_id, []).append((category_map.is_primary, category))
+    result: list[CardOut] = []
 
     for card in baby_cards:
-        category = next(iter(baby_card_categories_by_card_id.get(card.baby_card_id, [])), None)
+        cat = bc_cat_by_bcid.get(card.baby_card_id)
+        if cat is None and card.card_id is not None:
+            cat = master_cat_by_cid.get(card.card_id)
+        bcid, cname = (cat or (None, None))
         result.append(
             CardOut(
                 baby_card_id=card.baby_card_id,
@@ -107,31 +100,28 @@ def get_cards(baby_id: int, db: Session = Depends(get_db)):
                 source=card.source,
                 status=card.status,
                 usage_count=card.usage_count,
-                category=category,
+                category=cname,
+                baby_category_id=bcid,
             )
         )
 
-    for card in master_cards:
-        category_candidates = [category for _, category in sorted(
-            master_card_categories_by_card_id.get(card.card_id, []),
-            key=lambda item: (not item[0], item[1].name),
-        )]
+    for cm in master_cards:
+        cat = master_cat_by_cid.get(cm.card_id)
+        bcid, cname = (cat or (None, None))
         result.append(
             CardOut(
                 baby_card_id=None,
-                card_id=card.card_id,
-                text=card.base_text,
-                part_of_speech=card.part_of_speech,
-                image_url=card.default_image_url,
+                card_id=cm.card_id,
+                text=cm.base_text,
+                part_of_speech=cm.part_of_speech,
+                image_url=cm.default_image_url,
                 is_favorite=False,
                 source="system_default",
                 status="default",
                 usage_count=0,
-                category=category_candidates[0] if category_candidates else None,
+                category=cname,
+                baby_category_id=bcid,
             )
         )
 
-    return SuccessResponse(
-        data=result,
-        message="카드 목록을 조회했습니다.",
-    )
+    return SuccessResponse(data=result, message="카드 목록을 조회했습니다.")
