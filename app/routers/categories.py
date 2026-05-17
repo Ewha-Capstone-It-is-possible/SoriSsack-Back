@@ -10,10 +10,19 @@ from app.models import (
     CardCategoryMapMaster,
     CardMaster,
 )
-from app.schemas import CardOut, CategoryCardsOut, CategoryOut, SuccessResponse
+from app.schemas import CardCategoryOut, CardOut, CategoryCardsOut, CategoryOut, SuccessResponse
 
 
 router = APIRouter(prefix="/categories", tags=["categories"])
+
+
+def _category_out_from_baby_category(bcat: BabyCategory) -> CardCategoryOut:
+    return CardCategoryOut(
+        baby_category_id=bcat.baby_category_id,
+        category_id=bcat.category_id,
+        name=bcat.name,
+        icon_url=bcat.icon_url,
+    )
 
 
 @router.get("/{baby_id}", response_model=SuccessResponse)
@@ -55,6 +64,8 @@ def cards_in_category(baby_id: int, baby_category_id: int, db: Session = Depends
     if bcat is None or bcat.baby_id != baby_id:
         raise HTTPException(status_code=404, detail="카테고리를 찾을 수 없습니다.")
 
+    category = _category_out_from_baby_category(bcat)
+
     # 1) 개인 카드
     personal_rows = (
         db.query(BabyCard)
@@ -85,8 +96,7 @@ def cards_in_category(baby_id: int, baby_category_id: int, db: Session = Depends
                 source=bc.source,
                 status=bc.status,
                 usage_count=bc.usage_count,
-                category=bcat.name,
-                baby_category_id=baby_category_id,
+                category=category,
             )
         )
 
@@ -115,8 +125,7 @@ def cards_in_category(baby_id: int, baby_category_id: int, db: Session = Depends
                     source="system_default",
                     status="default",
                     usage_count=0,
-                    category=bcat.name,
-                    baby_category_id=baby_category_id,
+                    category=category,
                 )
             )
 

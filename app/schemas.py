@@ -31,6 +31,13 @@ class BabyOut(BaseModel):
     updated_at: datetime
 
 
+class CardCategoryOut(BaseModel):
+    baby_category_id: Optional[int] = None
+    category_id: Optional[int] = None
+    name: str
+    icon_url: Optional[str] = None
+
+
 class CardOut(BaseModel):
     baby_card_id: Optional[int] = None
     card_id: Optional[int] = None
@@ -41,8 +48,7 @@ class CardOut(BaseModel):
     source: str
     status: str
     usage_count: int = 0
-    category: Optional[str] = None
-    baby_category_id: Optional[int] = None
+    category: Optional[CardCategoryOut] = None
 
 
 class CategoryOut(BaseModel):

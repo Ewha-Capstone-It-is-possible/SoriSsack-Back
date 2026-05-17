@@ -148,8 +148,12 @@
       "source": "system_default",
       "status": "default",
       "usage_count": 15,
-      "category": "음식",
-      "baby_category_id": 5
+      "category": {
+        "baby_category_id": 5,
+        "category_id": 5,
+        "name": "음식",
+        "icon_url": null
+      }
     },
     {
       "baby_card_id": 502,
@@ -161,8 +165,12 @@
       "source": "parent_manual",
       "status": "add",
       "usage_count": 3,
-      "category": "생활",
-      "baby_category_id": 28
+      "category": {
+        "baby_category_id": 28,
+        "category_id": null,
+        "name": "생활",
+        "icon_url": null
+      }
     },
     {
       "baby_card_id": null,
@@ -174,8 +182,12 @@
       "source": "system_default",
       "status": "default",
       "usage_count": 0,
-      "category": "물건",
-      "baby_category_id": 3
+      "category": {
+        "baby_category_id": 3,
+        "category_id": 3,
+        "name": "물건",
+        "icon_url": null
+      }
     }
   ],
   "message": "카드 목록을 조회했습니다."
@@ -195,8 +207,16 @@
 | `source` | `string` | 카드 출처 (`"system_default"`, `"parent_manual"`, `"onboarding"`, `"ai_recommend_selected"`) |
 | `status` | `string` | 상태 (`"default"`, `"modified"`, `"off"`, `"add"`) |
 | `usage_count` | `int` | 사용 횟수 |
-| `category` | `string \| null` | 카테고리 이름 (예: `"음식"`, `"가족"`, `"감정"`, `"활동"`, `"장소"`, `"물건"`) |
+| `category` | `object \| null` | 카드가 속한 카테고리 정보 (중첩 객체) |
+
+### `category` 객체
+
+| 필드 | 타입 | 설명 |
+|------|------|------|
 | `baby_category_id` | `int \| null` | 아동별 카테고리 ID. `/categories/{baby_id}/{baby_category_id}/cards` 호출 시 사용 |
+| `category_id` | `int \| null` | 공용 카테고리 ID |
+| `name` | `string` | 카테고리명 (`"음식"`, `"가족"`, `"감정"`, `"활동"`, `"장소"`, `"물건"`) |
+| `icon_url` | `string \| null` | 카테고리 아이콘 |
 
 ### 카드 타입 판별
 
@@ -265,10 +285,10 @@
     "baby_category_id": 5,
     "category_name": "음식",
     "cards": [
-      { "baby_card_id": 7,  "card_id": 21, "text": "사과",   "is_favorite": true,  "status": "default", "source": "system_default", "category": "음식", "baby_category_id": 5 },
-      { "baby_card_id": 8,  "card_id": 11, "text": "물",     "is_favorite": true,  "status": "default", "source": "system_default", "category": "음식", "baby_category_id": 5 },
-      { "baby_card_id": 15, "card_id": 67, "text": "피크닉", "is_favorite": false, "status": "add",     "source": "parent_manual",  "category": "음식", "baby_category_id": 5 },
-      { "baby_card_id": null, "card_id": 12, "text": "밥",   "is_favorite": false, "status": "default", "source": "system_default", "category": "음식", "baby_category_id": 5 }
+      { "baby_card_id": 7,  "card_id": 21, "text": "사과",   "is_favorite": true,  "status": "default", "source": "system_default", "category": { "baby_category_id": 5, "category_id": 5, "name": "음식", "icon_url": null } },
+      { "baby_card_id": 8,  "card_id": 11, "text": "물",     "is_favorite": true,  "status": "default", "source": "system_default", "category": { "baby_category_id": 5, "category_id": 5, "name": "음식", "icon_url": null } },
+      { "baby_card_id": 15, "card_id": 67, "text": "피크닉", "is_favorite": false, "status": "add",     "source": "parent_manual",  "category": { "baby_category_id": 5, "category_id": 5, "name": "음식", "icon_url": null } },
+      { "baby_card_id": null, "card_id": 12, "text": "밥",   "is_favorite": false, "status": "default", "source": "system_default", "category": { "baby_category_id": 5, "category_id": 5, "name": "음식", "icon_url": null } }
     ]
   },
   "message": "카테고리 카드 목록을 조회했습니다."
