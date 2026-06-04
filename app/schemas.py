@@ -90,6 +90,22 @@ class SentenceOut(BaseModel):
     created_at: datetime
 
 
+class SentenceWordItem(BaseModel):
+    text: str
+    pos: Optional[str] = None
+    baby_card_id: Optional[int] = None
+    card_id: Optional[int] = None
+
+
+class SentenceGenerateRequest(BaseModel):
+    """멀티모달 '말하기': 선택 단어 배열 → AI 문장 보정 + 이미지 + 음성."""
+
+    baby_id: int
+    words: list[SentenceWordItem] = Field(..., min_length=1)
+    emotion: Optional[str] = "neutral"
+    save: bool = True   # 생성 결과를 sentence_master 에 저장할지
+
+
 class CreateVocabLogRequest(BaseModel):
     baby_id: int
     baby_card_id: Optional[int] = None

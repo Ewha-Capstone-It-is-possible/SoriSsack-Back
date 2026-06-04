@@ -1,0 +1,2702 @@
+{
+  "card_master": [
+    {
+      "card_id": 1,
+      "base_text": "물",
+      "normalized_text": "물",
+      "part_of_speech": "noun",
+      "category_name": "음식/음료",
+      "priority": 1,
+      "category_id": 2
+    },
+    {
+      "card_id": 2,
+      "base_text": "밥",
+      "normalized_text": "밥",
+      "part_of_speech": "noun",
+      "category_name": "음식/음료",
+      "priority": 1,
+      "category_id": 2
+    },
+    {
+      "card_id": 3,
+      "base_text": "우유",
+      "normalized_text": "우유",
+      "part_of_speech": "noun",
+      "category_name": "음식/음료",
+      "priority": 1,
+      "category_id": 2
+    },
+    {
+      "card_id": 4,
+      "base_text": "빵",
+      "normalized_text": "빵",
+      "part_of_speech": "noun",
+      "category_name": "음식/음료",
+      "priority": 2,
+      "category_id": 2
+    },
+    {
+      "card_id": 5,
+      "base_text": "과자",
+      "normalized_text": "과자",
+      "part_of_speech": "noun",
+      "category_name": "음식/음료",
+      "priority": 2,
+      "category_id": 2
+    },
+    {
+      "card_id": 6,
+      "base_text": "사과",
+      "normalized_text": "사과",
+      "part_of_speech": "noun",
+      "category_name": "음식/음료",
+      "priority": 2,
+      "category_id": 2
+    },
+    {
+      "card_id": 7,
+      "base_text": "바나나",
+      "normalized_text": "바나나",
+      "part_of_speech": "noun",
+      "category_name": "음식/음료",
+      "priority": 3,
+      "category_id": 2
+    },
+    {
+      "card_id": 8,
+      "base_text": "아이스크림",
+      "normalized_text": "아이스크림",
+      "part_of_speech": "noun",
+      "category_name": "음식/음료",
+      "priority": 3,
+      "category_id": 2
+    },
+    {
+      "card_id": 9,
+      "base_text": "주스",
+      "normalized_text": "주스",
+      "part_of_speech": "noun",
+      "category_name": "음식/음료",
+      "priority": 2,
+      "category_id": 2
+    },
+    {
+      "card_id": 10,
+      "base_text": "라면",
+      "normalized_text": "라면",
+      "part_of_speech": "noun",
+      "category_name": "음식/음료",
+      "priority": 3,
+      "category_id": 2
+    },
+    {
+      "card_id": 11,
+      "base_text": "먹다",
+      "normalized_text": "먹다",
+      "part_of_speech": "verb",
+      "category_name": "음식/음료",
+      "priority": 1,
+      "category_id": 2
+    },
+    {
+      "card_id": 12,
+      "base_text": "마시다",
+      "normalized_text": "마시다",
+      "part_of_speech": "verb",
+      "category_name": "음식/음료",
+      "priority": 1,
+      "category_id": 2
+    },
+    {
+      "card_id": 13,
+      "base_text": "배고파",
+      "normalized_text": "배고파",
+      "part_of_speech": "adjective",
+      "category_name": "감정",
+      "priority": 1,
+      "category_id": 3
+    },
+    {
+      "card_id": 14,
+      "base_text": "목말라",
+      "normalized_text": "목말라",
+      "part_of_speech": "adjective",
+      "category_name": "감정",
+      "priority": 1,
+      "category_id": 3
+    },
+    {
+      "card_id": 15,
+      "base_text": "아파",
+      "normalized_text": "아파",
+      "part_of_speech": "adjective",
+      "category_name": "감정",
+      "priority": 1,
+      "category_id": 3
+    },
+    {
+      "card_id": 16,
+      "base_text": "피곤해",
+      "normalized_text": "피곤해",
+      "part_of_speech": "adjective",
+      "category_name": "감정",
+      "priority": 2,
+      "category_id": 3
+    },
+    {
+      "card_id": 17,
+      "base_text": "졸려",
+      "normalized_text": "졸려",
+      "part_of_speech": "adjective",
+      "category_name": "감정",
+      "priority": 2,
+      "category_id": 3
+    },
+    {
+      "card_id": 18,
+      "base_text": "더워",
+      "normalized_text": "더워",
+      "part_of_speech": "adjective",
+      "category_name": "감정",
+      "priority": 2,
+      "category_id": 3
+    },
+    {
+      "card_id": 19,
+      "base_text": "추워",
+      "normalized_text": "추워",
+      "part_of_speech": "adjective",
+      "category_name": "감정",
+      "priority": 2,
+      "category_id": 3
+    },
+    {
+      "card_id": 20,
+      "base_text": "가려워",
+      "normalized_text": "가려워",
+      "part_of_speech": "adjective",
+      "category_name": "감정",
+      "priority": 3,
+      "category_id": 3
+    },
+    {
+      "card_id": 21,
+      "base_text": "좋아",
+      "normalized_text": "좋아",
+      "part_of_speech": "adjective",
+      "category_name": "감정",
+      "priority": 1,
+      "category_id": 3
+    },
+    {
+      "card_id": 22,
+      "base_text": "싫어",
+      "normalized_text": "싫어",
+      "part_of_speech": "adjective",
+      "category_name": "감정",
+      "priority": 1,
+      "category_id": 3
+    },
+    {
+      "card_id": 23,
+      "base_text": "슬퍼",
+      "normalized_text": "슬퍼",
+      "part_of_speech": "adjective",
+      "category_name": "감정",
+      "priority": 2,
+      "category_id": 3
+    },
+    {
+      "card_id": 24,
+      "base_text": "무서워",
+      "normalized_text": "무서워",
+      "part_of_speech": "adjective",
+      "category_name": "감정",
+      "priority": 2,
+      "category_id": 3
+    },
+    {
+      "card_id": 25,
+      "base_text": "행복해",
+      "normalized_text": "행복해",
+      "part_of_speech": "adjective",
+      "category_name": "감정",
+      "priority": 2,
+      "category_id": 3
+    },
+    {
+      "card_id": 26,
+      "base_text": "화나",
+      "normalized_text": "화나",
+      "part_of_speech": "adjective",
+      "category_name": "감정",
+      "priority": 2,
+      "category_id": 3
+    },
+    {
+      "card_id": 27,
+      "base_text": "신나",
+      "normalized_text": "신나",
+      "part_of_speech": "adjective",
+      "category_name": "감정",
+      "priority": 2,
+      "category_id": 3
+    },
+    {
+      "card_id": 28,
+      "base_text": "주세요",
+      "normalized_text": "주세요",
+      "part_of_speech": "verb",
+      "category_name": "놀이",
+      "priority": 1,
+      "category_id": 4
+    },
+    {
+      "card_id": 29,
+      "base_text": "도와줘",
+      "normalized_text": "도와줘",
+      "part_of_speech": "verb",
+      "category_name": "놀이",
+      "priority": 1,
+      "category_id": 4
+    },
+    {
+      "card_id": 30,
+      "base_text": "그만",
+      "normalized_text": "그만",
+      "part_of_speech": "verb",
+      "category_name": "놀이",
+      "priority": 1,
+      "category_id": 4
+    },
+    {
+      "card_id": 31,
+      "base_text": "더",
+      "normalized_text": "더",
+      "part_of_speech": "verb",
+      "category_name": "놀이",
+      "priority": 2,
+      "category_id": 4
+    },
+    {
+      "card_id": 32,
+      "base_text": "같이",
+      "normalized_text": "같이",
+      "part_of_speech": "verb",
+      "category_name": "놀이",
+      "priority": 2,
+      "category_id": 4
+    },
+    {
+      "card_id": 33,
+      "base_text": "안해",
+      "normalized_text": "안해",
+      "part_of_speech": "verb",
+      "category_name": "놀이",
+      "priority": 2,
+      "category_id": 4
+    },
+    {
+      "card_id": 34,
+      "base_text": "틀어줘",
+      "normalized_text": "틀어줘",
+      "part_of_speech": "verb",
+      "category_name": "놀이",
+      "priority": 2,
+      "category_id": 4
+    },
+    {
+      "card_id": 35,
+      "base_text": "장난감",
+      "normalized_text": "장난감",
+      "part_of_speech": "noun",
+      "category_name": "놀이",
+      "priority": 2,
+      "category_id": 4
+    },
+    {
+      "card_id": 36,
+      "base_text": "블록",
+      "normalized_text": "블록",
+      "part_of_speech": "noun",
+      "category_name": "놀이",
+      "priority": 3,
+      "category_id": 4
+    },
+    {
+      "card_id": 37,
+      "base_text": "인형",
+      "normalized_text": "인형",
+      "part_of_speech": "noun",
+      "category_name": "놀이",
+      "priority": 3,
+      "category_id": 4
+    },
+    {
+      "card_id": 38,
+      "base_text": "공",
+      "normalized_text": "공",
+      "part_of_speech": "noun",
+      "category_name": "놀이",
+      "priority": 3,
+      "category_id": 4
+    },
+    {
+      "card_id": 39,
+      "base_text": "그림책",
+      "normalized_text": "그림책",
+      "part_of_speech": "noun",
+      "category_name": "놀이",
+      "priority": 3,
+      "category_id": 4
+    },
+    {
+      "card_id": 40,
+      "base_text": "사주세요",
+      "normalized_text": "사주세요",
+      "part_of_speech": "verb",
+      "category_name": "놀이",
+      "priority": 2,
+      "category_id": 4
+    },
+    {
+      "card_id": 41,
+      "base_text": "갖고싶어요",
+      "normalized_text": "갖고싶어요",
+      "part_of_speech": "adjective",
+      "category_name": "놀이",
+      "priority": 2,
+      "category_id": 4
+    },
+    {
+      "card_id": 42,
+      "base_text": "놀고싶어요",
+      "normalized_text": "놀고싶어요",
+      "part_of_speech": "verb",
+      "category_name": "놀이",
+      "priority": 2,
+      "category_id": 4
+    },
+    {
+      "card_id": 43,
+      "base_text": "놀다",
+      "normalized_text": "놀다",
+      "part_of_speech": "verb",
+      "category_name": "놀이",
+      "priority": 2,
+      "category_id": 4
+    },
+    {
+      "card_id": 44,
+      "base_text": "TV",
+      "normalized_text": "tv",
+      "part_of_speech": "noun",
+      "category_name": "물건",
+      "priority": 2,
+      "category_id": 6
+    },
+    {
+      "card_id": 45,
+      "base_text": "뽀로로",
+      "normalized_text": "뽀로로",
+      "part_of_speech": "noun",
+      "category_name": "물건",
+      "priority": 3,
+      "category_id": 6
+    },
+    {
+      "card_id": 46,
+      "base_text": "유튜브",
+      "normalized_text": "유튜브",
+      "part_of_speech": "noun",
+      "category_name": "물건",
+      "priority": 3,
+      "category_id": 6
+    },
+    {
+      "card_id": 47,
+      "base_text": "보다",
+      "normalized_text": "보다",
+      "part_of_speech": "verb",
+      "category_name": "물건",
+      "priority": 2,
+      "category_id": 6
+    },
+    {
+      "card_id": 48,
+      "base_text": "화장실",
+      "normalized_text": "화장실",
+      "part_of_speech": "noun",
+      "category_name": "장소",
+      "priority": 1,
+      "category_id": 5
+    },
+    {
+      "card_id": 49,
+      "base_text": "방",
+      "normalized_text": "방",
+      "part_of_speech": "noun",
+      "category_name": "장소",
+      "priority": 2,
+      "category_id": 5
+    },
+    {
+      "card_id": 50,
+      "base_text": "놀이터",
+      "normalized_text": "놀이터",
+      "part_of_speech": "noun",
+      "category_name": "장소",
+      "priority": 2,
+      "category_id": 5
+    },
+    {
+      "card_id": 51,
+      "base_text": "학교",
+      "normalized_text": "학교",
+      "part_of_speech": "noun",
+      "category_name": "장소",
+      "priority": 2,
+      "category_id": 5
+    },
+    {
+      "card_id": 52,
+      "base_text": "집",
+      "normalized_text": "집",
+      "part_of_speech": "noun",
+      "category_name": "장소",
+      "priority": 2,
+      "category_id": 5
+    },
+    {
+      "card_id": 53,
+      "base_text": "가다",
+      "normalized_text": "가다",
+      "part_of_speech": "verb",
+      "category_name": "놀이",
+      "priority": 1,
+      "category_id": 4
+    },
+    {
+      "card_id": 54,
+      "base_text": "오다",
+      "normalized_text": "오다",
+      "part_of_speech": "verb",
+      "category_name": "놀이",
+      "priority": 2,
+      "category_id": 4
+    },
+    {
+      "card_id": 55,
+      "base_text": "자다",
+      "normalized_text": "자다",
+      "part_of_speech": "verb",
+      "category_name": "놀이",
+      "priority": 2,
+      "category_id": 4
+    },
+    {
+      "card_id": 56,
+      "base_text": "일어나",
+      "normalized_text": "일어나",
+      "part_of_speech": "verb",
+      "category_name": "놀이",
+      "priority": 2,
+      "category_id": 4
+    },
+    {
+      "card_id": 57,
+      "base_text": "씻다",
+      "normalized_text": "씻다",
+      "part_of_speech": "verb",
+      "category_name": "놀이",
+      "priority": 2,
+      "category_id": 4
+    },
+    {
+      "card_id": 58,
+      "base_text": "입다",
+      "normalized_text": "입다",
+      "part_of_speech": "verb",
+      "category_name": "놀이",
+      "priority": 3,
+      "category_id": 4
+    },
+    {
+      "card_id": 59,
+      "base_text": "엄마",
+      "normalized_text": "엄마",
+      "part_of_speech": "noun",
+      "category_name": "가족",
+      "priority": 1,
+      "category_id": 1
+    },
+    {
+      "card_id": 60,
+      "base_text": "아빠",
+      "normalized_text": "아빠",
+      "part_of_speech": "noun",
+      "category_name": "가족",
+      "priority": 1,
+      "category_id": 1
+    },
+    {
+      "card_id": 61,
+      "base_text": "선생님",
+      "normalized_text": "선생님",
+      "part_of_speech": "noun",
+      "category_name": "가족",
+      "priority": 2,
+      "category_id": 1
+    },
+    {
+      "card_id": 62,
+      "base_text": "친구",
+      "normalized_text": "친구",
+      "part_of_speech": "noun",
+      "category_name": "가족",
+      "priority": 2,
+      "category_id": 1
+    },
+    {
+      "card_id": 63,
+      "base_text": "컵",
+      "normalized_text": "컵",
+      "part_of_speech": "noun",
+      "category_name": "물건",
+      "priority": 3,
+      "category_id": 6
+    },
+    {
+      "card_id": 64,
+      "base_text": "이불",
+      "normalized_text": "이불",
+      "part_of_speech": "noun",
+      "category_name": "물건",
+      "priority": 3,
+      "category_id": 6
+    },
+    {
+      "card_id": 65,
+      "base_text": "약",
+      "normalized_text": "약",
+      "part_of_speech": "noun",
+      "category_name": "물건",
+      "priority": 2,
+      "category_id": 6
+    },
+    {
+      "card_id": 66,
+      "base_text": "치킨",
+      "normalized_text": "치킨",
+      "part_of_speech": "noun",
+      "category_name": "음식/음료",
+      "priority": 2,
+      "category_id": 2
+    },
+    {
+      "card_id": 67,
+      "base_text": "피자",
+      "normalized_text": "피자",
+      "part_of_speech": "noun",
+      "category_name": "음식/음료",
+      "priority": 3,
+      "category_id": 2
+    },
+    {
+      "card_id": 68,
+      "base_text": "김밥",
+      "normalized_text": "김밥",
+      "part_of_speech": "noun",
+      "category_name": "음식/음료",
+      "priority": 3,
+      "category_id": 2
+    },
+    {
+      "card_id": 69,
+      "base_text": "케이크",
+      "normalized_text": "케이크",
+      "part_of_speech": "noun",
+      "category_name": "음식/음료",
+      "priority": 3,
+      "category_id": 2
+    },
+    {
+      "card_id": 70,
+      "base_text": "딸기",
+      "normalized_text": "딸기",
+      "part_of_speech": "noun",
+      "category_name": "음식/음료",
+      "priority": 3,
+      "category_id": 2
+    },
+    {
+      "card_id": 71,
+      "base_text": "레고",
+      "normalized_text": "레고",
+      "part_of_speech": "noun",
+      "category_name": "놀이",
+      "priority": 2,
+      "category_id": 4
+    },
+    {
+      "card_id": 72,
+      "base_text": "자동차",
+      "normalized_text": "자동차",
+      "part_of_speech": "noun",
+      "category_name": "놀이",
+      "priority": 3,
+      "category_id": 4
+    },
+    {
+      "card_id": 73,
+      "base_text": "기차",
+      "normalized_text": "기차",
+      "part_of_speech": "noun",
+      "category_name": "놀이",
+      "priority": 3,
+      "category_id": 4
+    },
+    {
+      "card_id": 74,
+      "base_text": "퍼즐",
+      "normalized_text": "퍼즐",
+      "part_of_speech": "noun",
+      "category_name": "놀이",
+      "priority": 3,
+      "category_id": 4
+    },
+    {
+      "card_id": 75,
+      "base_text": "색연필",
+      "normalized_text": "색연필",
+      "part_of_speech": "noun",
+      "category_name": "물건",
+      "priority": 3,
+      "category_id": 6
+    },
+    {
+      "card_id": 76,
+      "base_text": "맛있어",
+      "normalized_text": "맛있어",
+      "part_of_speech": "adjective",
+      "category_name": "감정",
+      "priority": 2,
+      "category_id": 3
+    },
+    {
+      "card_id": 77,
+      "base_text": "맛없어",
+      "normalized_text": "맛없어",
+      "part_of_speech": "adjective",
+      "category_name": "감정",
+      "priority": 2,
+      "category_id": 3
+    },
+    {
+      "card_id": 78,
+      "base_text": "부끄러워",
+      "normalized_text": "부끄러워",
+      "part_of_speech": "adjective",
+      "category_name": "감정",
+      "priority": 3,
+      "category_id": 3
+    },
+    {
+      "card_id": 79,
+      "base_text": "억울해",
+      "normalized_text": "억울해",
+      "part_of_speech": "adjective",
+      "category_name": "감정",
+      "priority": 3,
+      "category_id": 3
+    },
+    {
+      "card_id": 80,
+      "base_text": "신기해",
+      "normalized_text": "신기해",
+      "part_of_speech": "adjective",
+      "category_name": "감정",
+      "priority": 3,
+      "category_id": 3
+    },
+    {
+      "card_id": 81,
+      "base_text": "공원",
+      "normalized_text": "공원",
+      "part_of_speech": "noun",
+      "category_name": "장소",
+      "priority": 2,
+      "category_id": 5
+    },
+    {
+      "card_id": 82,
+      "base_text": "마트",
+      "normalized_text": "마트",
+      "part_of_speech": "noun",
+      "category_name": "장소",
+      "priority": 2,
+      "category_id": 5
+    },
+    {
+      "card_id": 83,
+      "base_text": "병원",
+      "normalized_text": "병원",
+      "part_of_speech": "noun",
+      "category_name": "장소",
+      "priority": 2,
+      "category_id": 5
+    },
+    {
+      "card_id": 84,
+      "base_text": "유치원",
+      "normalized_text": "유치원",
+      "part_of_speech": "noun",
+      "category_name": "장소",
+      "priority": 2,
+      "category_id": 5
+    },
+    {
+      "card_id": 85,
+      "base_text": "달리다",
+      "normalized_text": "달리다",
+      "part_of_speech": "verb",
+      "category_name": "놀이",
+      "priority": 3,
+      "category_id": 4
+    },
+    {
+      "card_id": 86,
+      "base_text": "그리다",
+      "normalized_text": "그리다",
+      "part_of_speech": "verb",
+      "category_name": "놀이",
+      "priority": 3,
+      "category_id": 4
+    },
+    {
+      "card_id": 87,
+      "base_text": "읽다",
+      "normalized_text": "읽다",
+      "part_of_speech": "verb",
+      "category_name": "놀이",
+      "priority": 3,
+      "category_id": 4
+    },
+    {
+      "card_id": 88,
+      "base_text": "쓰다",
+      "normalized_text": "쓰다",
+      "part_of_speech": "verb",
+      "category_name": "놀이",
+      "priority": 3,
+      "category_id": 4
+    },
+    {
+      "card_id": 89,
+      "base_text": "안아줘",
+      "normalized_text": "안아줘",
+      "part_of_speech": "verb",
+      "category_name": "놀이",
+      "priority": 2,
+      "category_id": 4
+    },
+    {
+      "card_id": 90,
+      "base_text": "칭찬해줘",
+      "normalized_text": "칭찬해줘",
+      "part_of_speech": "verb",
+      "category_name": "놀이",
+      "priority": 3,
+      "category_id": 4
+    },
+    {
+      "card_id": 91,
+      "base_text": "같이해요",
+      "normalized_text": "같이해요",
+      "part_of_speech": "verb",
+      "category_name": "놀이",
+      "priority": 2,
+      "category_id": 4
+    },
+    {
+      "card_id": 92,
+      "base_text": "기다려",
+      "normalized_text": "기다려",
+      "part_of_speech": "verb",
+      "category_name": "놀이",
+      "priority": 2,
+      "category_id": 4
+    },
+    {
+      "card_id": 93,
+      "base_text": "힘들어",
+      "normalized_text": "힘들어",
+      "part_of_speech": "adjective",
+      "category_name": "감정",
+      "priority": 2,
+      "category_id": 3
+    },
+    {
+      "card_id": 94,
+      "base_text": "배불러",
+      "normalized_text": "배불러",
+      "part_of_speech": "adjective",
+      "category_name": "감정",
+      "priority": 2,
+      "category_id": 3
+    },
+    {
+      "card_id": 95,
+      "base_text": "어지러워",
+      "normalized_text": "어지러워",
+      "part_of_speech": "adjective",
+      "category_name": "감정",
+      "priority": 3,
+      "category_id": 3
+    }
+  ],
+  "categories": [
+    {
+      "category_id": 1,
+      "name": "가족",
+      "icon_url": "icon-mom"
+    },
+    {
+      "category_id": 2,
+      "name": "음식/음료",
+      "icon_url": "icon-apple"
+    },
+    {
+      "category_id": 3,
+      "name": "감정",
+      "icon_url": "icon-happiness"
+    },
+    {
+      "category_id": 4,
+      "name": "놀이",
+      "icon_url": "icon-sports"
+    },
+    {
+      "category_id": 5,
+      "name": "장소",
+      "icon_url": "icon-home"
+    },
+    {
+      "category_id": 6,
+      "name": "물건",
+      "icon_url": "icon-tv"
+    }
+  ],
+  "card_category_map": [
+    {
+      "card_id": 1,
+      "category_id": 2,
+      "is_primary": true
+    },
+    {
+      "card_id": 2,
+      "category_id": 2,
+      "is_primary": true
+    },
+    {
+      "card_id": 3,
+      "category_id": 2,
+      "is_primary": true
+    },
+    {
+      "card_id": 4,
+      "category_id": 2,
+      "is_primary": true
+    },
+    {
+      "card_id": 5,
+      "category_id": 2,
+      "is_primary": true
+    },
+    {
+      "card_id": 6,
+      "category_id": 2,
+      "is_primary": true
+    },
+    {
+      "card_id": 7,
+      "category_id": 2,
+      "is_primary": true
+    },
+    {
+      "card_id": 8,
+      "category_id": 2,
+      "is_primary": true
+    },
+    {
+      "card_id": 9,
+      "category_id": 2,
+      "is_primary": true
+    },
+    {
+      "card_id": 10,
+      "category_id": 2,
+      "is_primary": true
+    },
+    {
+      "card_id": 11,
+      "category_id": 2,
+      "is_primary": true
+    },
+    {
+      "card_id": 12,
+      "category_id": 2,
+      "is_primary": true
+    },
+    {
+      "card_id": 13,
+      "category_id": 3,
+      "is_primary": true
+    },
+    {
+      "card_id": 14,
+      "category_id": 3,
+      "is_primary": true
+    },
+    {
+      "card_id": 15,
+      "category_id": 3,
+      "is_primary": true
+    },
+    {
+      "card_id": 16,
+      "category_id": 3,
+      "is_primary": true
+    },
+    {
+      "card_id": 17,
+      "category_id": 3,
+      "is_primary": true
+    },
+    {
+      "card_id": 18,
+      "category_id": 3,
+      "is_primary": true
+    },
+    {
+      "card_id": 19,
+      "category_id": 3,
+      "is_primary": true
+    },
+    {
+      "card_id": 20,
+      "category_id": 3,
+      "is_primary": true
+    },
+    {
+      "card_id": 21,
+      "category_id": 3,
+      "is_primary": true
+    },
+    {
+      "card_id": 22,
+      "category_id": 3,
+      "is_primary": true
+    },
+    {
+      "card_id": 23,
+      "category_id": 3,
+      "is_primary": true
+    },
+    {
+      "card_id": 24,
+      "category_id": 3,
+      "is_primary": true
+    },
+    {
+      "card_id": 25,
+      "category_id": 3,
+      "is_primary": true
+    },
+    {
+      "card_id": 26,
+      "category_id": 3,
+      "is_primary": true
+    },
+    {
+      "card_id": 27,
+      "category_id": 3,
+      "is_primary": true
+    },
+    {
+      "card_id": 28,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 29,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 30,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 31,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 32,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 33,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 34,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 35,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 36,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 37,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 38,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 39,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 40,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 41,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 42,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 43,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 44,
+      "category_id": 6,
+      "is_primary": true
+    },
+    {
+      "card_id": 45,
+      "category_id": 6,
+      "is_primary": true
+    },
+    {
+      "card_id": 46,
+      "category_id": 6,
+      "is_primary": true
+    },
+    {
+      "card_id": 47,
+      "category_id": 6,
+      "is_primary": true
+    },
+    {
+      "card_id": 48,
+      "category_id": 5,
+      "is_primary": true
+    },
+    {
+      "card_id": 49,
+      "category_id": 5,
+      "is_primary": true
+    },
+    {
+      "card_id": 50,
+      "category_id": 5,
+      "is_primary": true
+    },
+    {
+      "card_id": 51,
+      "category_id": 5,
+      "is_primary": true
+    },
+    {
+      "card_id": 52,
+      "category_id": 5,
+      "is_primary": true
+    },
+    {
+      "card_id": 53,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 54,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 55,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 56,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 57,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 58,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 59,
+      "category_id": 1,
+      "is_primary": true
+    },
+    {
+      "card_id": 60,
+      "category_id": 1,
+      "is_primary": true
+    },
+    {
+      "card_id": 61,
+      "category_id": 1,
+      "is_primary": true
+    },
+    {
+      "card_id": 62,
+      "category_id": 1,
+      "is_primary": true
+    },
+    {
+      "card_id": 63,
+      "category_id": 6,
+      "is_primary": true
+    },
+    {
+      "card_id": 64,
+      "category_id": 6,
+      "is_primary": true
+    },
+    {
+      "card_id": 65,
+      "category_id": 6,
+      "is_primary": true
+    },
+    {
+      "card_id": 66,
+      "category_id": 2,
+      "is_primary": true
+    },
+    {
+      "card_id": 67,
+      "category_id": 2,
+      "is_primary": true
+    },
+    {
+      "card_id": 68,
+      "category_id": 2,
+      "is_primary": true
+    },
+    {
+      "card_id": 69,
+      "category_id": 2,
+      "is_primary": true
+    },
+    {
+      "card_id": 70,
+      "category_id": 2,
+      "is_primary": true
+    },
+    {
+      "card_id": 71,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 72,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 73,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 74,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 75,
+      "category_id": 6,
+      "is_primary": true
+    },
+    {
+      "card_id": 76,
+      "category_id": 3,
+      "is_primary": true
+    },
+    {
+      "card_id": 77,
+      "category_id": 3,
+      "is_primary": true
+    },
+    {
+      "card_id": 78,
+      "category_id": 3,
+      "is_primary": true
+    },
+    {
+      "card_id": 79,
+      "category_id": 3,
+      "is_primary": true
+    },
+    {
+      "card_id": 80,
+      "category_id": 3,
+      "is_primary": true
+    },
+    {
+      "card_id": 81,
+      "category_id": 5,
+      "is_primary": true
+    },
+    {
+      "card_id": 82,
+      "category_id": 5,
+      "is_primary": true
+    },
+    {
+      "card_id": 83,
+      "category_id": 5,
+      "is_primary": true
+    },
+    {
+      "card_id": 84,
+      "category_id": 5,
+      "is_primary": true
+    },
+    {
+      "card_id": 85,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 86,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 87,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 88,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 89,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 90,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 91,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 92,
+      "category_id": 4,
+      "is_primary": true
+    },
+    {
+      "card_id": 93,
+      "category_id": 3,
+      "is_primary": true
+    },
+    {
+      "card_id": 94,
+      "category_id": 3,
+      "is_primary": true
+    },
+    {
+      "card_id": 95,
+      "category_id": 3,
+      "is_primary": true
+    }
+  ],
+  "babies": [
+    {
+      "baby_id": 1,
+      "baby_name": "민준",
+      "sex": "M",
+      "birth": "2019-03-10"
+    },
+    {
+      "baby_id": 2,
+      "baby_name": "서아",
+      "sex": "F",
+      "birth": "2021-05-20"
+    },
+    {
+      "baby_id": 3,
+      "baby_name": "지호",
+      "sex": "M",
+      "birth": "2020-08-15"
+    },
+    {
+      "baby_id": 4,
+      "baby_name": "하은",
+      "sex": "F",
+      "birth": "2018-02-01"
+    },
+    {
+      "baby_id": 5,
+      "baby_name": "준서",
+      "sex": "M",
+      "birth": "2022-06-15"
+    }
+  ],
+  "baby_cards": [
+    {
+      "baby_card_id": 101,
+      "baby_id": 1,
+      "card_id": 2,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": true,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 42,
+      "category_name": "음식/음료",
+      "category_id": 2
+    },
+    {
+      "baby_card_id": 102,
+      "baby_id": 1,
+      "card_id": 1,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": true,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 38,
+      "category_name": "음식/음료",
+      "category_id": 2
+    },
+    {
+      "baby_card_id": 103,
+      "baby_id": 1,
+      "card_id": 3,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 25,
+      "category_name": "음식/음료",
+      "category_id": 2
+    },
+    {
+      "baby_card_id": 104,
+      "baby_id": 1,
+      "card_id": 11,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 30,
+      "category_name": "음식/음료",
+      "category_id": 2
+    },
+    {
+      "baby_card_id": 105,
+      "baby_id": 1,
+      "card_id": 28,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": true,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 45,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 106,
+      "baby_id": 1,
+      "card_id": 13,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": true,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 20,
+      "category_name": "감정",
+      "category_id": 3
+    },
+    {
+      "baby_card_id": 107,
+      "baby_id": 1,
+      "card_id": 59,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": true,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 28,
+      "category_name": "가족",
+      "category_id": 1
+    },
+    {
+      "baby_card_id": 108,
+      "baby_id": 1,
+      "card_id": 22,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 12,
+      "category_name": "감정",
+      "category_id": 3
+    },
+    {
+      "baby_card_id": 109,
+      "baby_id": 1,
+      "card_id": 15,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 8,
+      "category_name": "감정",
+      "category_id": 3
+    },
+    {
+      "baby_card_id": 110,
+      "baby_id": 1,
+      "card_id": 48,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 15,
+      "category_name": "장소",
+      "category_id": 5
+    },
+    {
+      "baby_card_id": 111,
+      "baby_id": 1,
+      "card_id": 31,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 18,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 112,
+      "baby_id": 1,
+      "card_id": 33,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 10,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 113,
+      "baby_id": 1,
+      "card_id": 12,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 22,
+      "category_name": "음식/음료",
+      "category_id": 2
+    },
+    {
+      "baby_card_id": 114,
+      "baby_id": 1,
+      "card_id": 5,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 20,
+      "category_name": "음식/음료",
+      "category_id": 2
+    },
+    {
+      "baby_card_id": 115,
+      "baby_id": 1,
+      "card_id": 10,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 15,
+      "category_name": "음식/음료",
+      "category_id": 2
+    },
+    {
+      "baby_card_id": 116,
+      "baby_id": 1,
+      "card_id": 76,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 14,
+      "category_name": "감정",
+      "category_id": 3
+    },
+    {
+      "baby_card_id": 117,
+      "baby_id": 1,
+      "card_id": 4,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 12,
+      "category_name": "음식/음료",
+      "category_id": 2
+    },
+    {
+      "baby_card_id": 118,
+      "baby_id": 1,
+      "card_id": 63,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 8,
+      "category_name": "물건",
+      "category_id": 6
+    },
+    {
+      "baby_card_id": 119,
+      "baby_id": 1,
+      "card_id": null,
+      "text": "김치찌개",
+      "part_of_speech": "noun",
+      "is_favorite": false,
+      "source": "parent_manual",
+      "status": "add",
+      "usage_count": 10,
+      "category_name": "음식/음료",
+      "category_id": 2
+    },
+    {
+      "baby_card_id": 120,
+      "baby_id": 1,
+      "card_id": null,
+      "text": "떡볶이",
+      "part_of_speech": "noun",
+      "is_favorite": false,
+      "source": "parent_manual",
+      "status": "add",
+      "usage_count": 7,
+      "category_name": "음식/음료",
+      "category_id": 2
+    },
+    {
+      "baby_card_id": 121,
+      "baby_id": 1,
+      "card_id": null,
+      "text": "된장국",
+      "part_of_speech": "noun",
+      "is_favorite": false,
+      "source": "parent_manual",
+      "status": "add",
+      "usage_count": 5,
+      "category_name": "음식/음료",
+      "category_id": 2
+    },
+    {
+      "baby_card_id": 201,
+      "baby_id": 2,
+      "card_id": 37,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": true,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 30,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 202,
+      "baby_id": 2,
+      "card_id": 41,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": true,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 25,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 203,
+      "baby_id": 2,
+      "card_id": 21,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 22,
+      "category_name": "감정",
+      "category_id": 3
+    },
+    {
+      "baby_card_id": 204,
+      "baby_id": 2,
+      "card_id": 45,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": true,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 28,
+      "category_name": "물건",
+      "category_id": 6
+    },
+    {
+      "baby_card_id": 205,
+      "baby_id": 2,
+      "card_id": 47,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 26,
+      "category_name": "물건",
+      "category_id": 6
+    },
+    {
+      "baby_card_id": 206,
+      "baby_id": 2,
+      "card_id": 43,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 20,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 207,
+      "baby_id": 2,
+      "card_id": 28,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": true,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 22,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 208,
+      "baby_id": 2,
+      "card_id": 59,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": true,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 30,
+      "category_name": "가족",
+      "category_id": 1
+    },
+    {
+      "baby_card_id": 209,
+      "baby_id": 2,
+      "card_id": 23,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 12,
+      "category_name": "감정",
+      "category_id": 3
+    },
+    {
+      "baby_card_id": 210,
+      "baby_id": 2,
+      "card_id": 22,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 14,
+      "category_name": "감정",
+      "category_id": 3
+    },
+    {
+      "baby_card_id": 211,
+      "baby_id": 2,
+      "card_id": 25,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 18,
+      "category_name": "감정",
+      "category_id": 3
+    },
+    {
+      "baby_card_id": 212,
+      "baby_id": 2,
+      "card_id": 24,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 10,
+      "category_name": "감정",
+      "category_id": 3
+    },
+    {
+      "baby_card_id": 213,
+      "baby_id": 2,
+      "card_id": 44,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 20,
+      "category_name": "물건",
+      "category_id": 6
+    },
+    {
+      "baby_card_id": 214,
+      "baby_id": 2,
+      "card_id": 32,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 16,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 215,
+      "baby_id": 2,
+      "card_id": 60,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 18,
+      "category_name": "가족",
+      "category_id": 1
+    },
+    {
+      "baby_card_id": 216,
+      "baby_id": 2,
+      "card_id": 36,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 14,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 217,
+      "baby_id": 2,
+      "card_id": 27,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 16,
+      "category_name": "감정",
+      "category_id": 3
+    },
+    {
+      "baby_card_id": 218,
+      "baby_id": 2,
+      "card_id": 34,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 12,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 219,
+      "baby_id": 2,
+      "card_id": null,
+      "text": "핑크퐁",
+      "part_of_speech": "noun",
+      "is_favorite": true,
+      "source": "parent_manual",
+      "status": "add",
+      "usage_count": 22,
+      "category_name": "물건",
+      "category_id": 6
+    },
+    {
+      "baby_card_id": 220,
+      "baby_id": 2,
+      "card_id": null,
+      "text": "티니핑",
+      "part_of_speech": "noun",
+      "is_favorite": true,
+      "source": "parent_manual",
+      "status": "add",
+      "usage_count": 15,
+      "category_name": "물건",
+      "category_id": 6
+    },
+    {
+      "baby_card_id": 221,
+      "baby_id": 2,
+      "card_id": null,
+      "text": "보고싶어",
+      "part_of_speech": "adjective",
+      "is_favorite": false,
+      "source": "parent_manual",
+      "status": "add",
+      "usage_count": 10,
+      "category_name": "감정",
+      "category_id": 3
+    },
+    {
+      "baby_card_id": 222,
+      "baby_id": 2,
+      "card_id": null,
+      "text": "예뻐",
+      "part_of_speech": "adjective",
+      "is_favorite": false,
+      "source": "parent_manual",
+      "status": "add",
+      "usage_count": 6,
+      "category_name": "감정",
+      "category_id": 3
+    },
+    {
+      "baby_card_id": 301,
+      "baby_id": 3,
+      "card_id": 35,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": true,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 25,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 302,
+      "baby_id": 3,
+      "card_id": 40,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": true,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 30,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 303,
+      "baby_id": 3,
+      "card_id": 41,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": true,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 22,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 304,
+      "baby_id": 3,
+      "card_id": 42,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 18,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 305,
+      "baby_id": 3,
+      "card_id": 50,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 20,
+      "category_name": "장소",
+      "category_id": 5
+    },
+    {
+      "baby_card_id": 306,
+      "baby_id": 3,
+      "card_id": 53,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 16,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 307,
+      "baby_id": 3,
+      "card_id": 28,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": true,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 25,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 308,
+      "baby_id": 3,
+      "card_id": 59,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": true,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 22,
+      "category_name": "가족",
+      "category_id": 1
+    },
+    {
+      "baby_card_id": 309,
+      "baby_id": 3,
+      "card_id": 22,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 10,
+      "category_name": "감정",
+      "category_id": 3
+    },
+    {
+      "baby_card_id": 310,
+      "baby_id": 3,
+      "card_id": 15,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 6,
+      "category_name": "감정",
+      "category_id": 3
+    },
+    {
+      "baby_card_id": 311,
+      "baby_id": 3,
+      "card_id": 38,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 18,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 312,
+      "baby_id": 3,
+      "card_id": 62,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 14,
+      "category_name": "가족",
+      "category_id": 1
+    },
+    {
+      "baby_card_id": 313,
+      "baby_id": 3,
+      "card_id": 85,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 12,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 314,
+      "baby_id": 3,
+      "card_id": 71,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 16,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 315,
+      "baby_id": 3,
+      "card_id": 43,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 14,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 316,
+      "baby_id": 3,
+      "card_id": 60,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 12,
+      "category_name": "가족",
+      "category_id": 1
+    },
+    {
+      "baby_card_id": 317,
+      "baby_id": 3,
+      "card_id": null,
+      "text": "축구공",
+      "part_of_speech": "noun",
+      "is_favorite": false,
+      "source": "parent_manual",
+      "status": "add",
+      "usage_count": 12,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 318,
+      "baby_id": 3,
+      "card_id": null,
+      "text": "더뛰고싶어",
+      "part_of_speech": "verb",
+      "is_favorite": false,
+      "source": "parent_manual",
+      "status": "add",
+      "usage_count": 8,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 319,
+      "baby_id": 3,
+      "card_id": null,
+      "text": "같이놀자",
+      "part_of_speech": "verb",
+      "is_favorite": false,
+      "source": "parent_manual",
+      "status": "add",
+      "usage_count": 6,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 401,
+      "baby_id": 4,
+      "card_id": 51,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": true,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 25,
+      "category_name": "장소",
+      "category_id": 5
+    },
+    {
+      "baby_card_id": 402,
+      "baby_id": 4,
+      "card_id": 61,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": true,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 20,
+      "category_name": "가족",
+      "category_id": 1
+    },
+    {
+      "baby_card_id": 403,
+      "baby_id": 4,
+      "card_id": 62,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 22,
+      "category_name": "가족",
+      "category_id": 1
+    },
+    {
+      "baby_card_id": 404,
+      "baby_id": 4,
+      "card_id": 53,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 18,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 405,
+      "baby_id": 4,
+      "card_id": 21,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 20,
+      "category_name": "감정",
+      "category_id": 3
+    },
+    {
+      "baby_card_id": 406,
+      "baby_id": 4,
+      "card_id": 22,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 15,
+      "category_name": "감정",
+      "category_id": 3
+    },
+    {
+      "baby_card_id": 407,
+      "baby_id": 4,
+      "card_id": 87,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 14,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 408,
+      "baby_id": 4,
+      "card_id": 86,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 12,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 409,
+      "baby_id": 4,
+      "card_id": 11,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 18,
+      "category_name": "음식/음료",
+      "category_id": 2
+    },
+    {
+      "baby_card_id": 410,
+      "baby_id": 4,
+      "card_id": 15,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 8,
+      "category_name": "감정",
+      "category_id": 3
+    },
+    {
+      "baby_card_id": 411,
+      "baby_id": 4,
+      "card_id": 76,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 16,
+      "category_name": "감정",
+      "category_id": 3
+    },
+    {
+      "baby_card_id": 412,
+      "baby_id": 4,
+      "card_id": 93,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 14,
+      "category_name": "감정",
+      "category_id": 3
+    },
+    {
+      "baby_card_id": 413,
+      "baby_id": 4,
+      "card_id": 32,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 18,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 414,
+      "baby_id": 4,
+      "card_id": 2,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 20,
+      "category_name": "음식/음료",
+      "category_id": 2
+    },
+    {
+      "baby_card_id": 415,
+      "baby_id": 4,
+      "card_id": 1,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 16,
+      "category_name": "음식/음료",
+      "category_id": 2
+    },
+    {
+      "baby_card_id": 416,
+      "baby_id": 4,
+      "card_id": 16,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 12,
+      "category_name": "감정",
+      "category_id": 3
+    },
+    {
+      "baby_card_id": 417,
+      "baby_id": 4,
+      "card_id": 59,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": true,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 22,
+      "category_name": "가족",
+      "category_id": 1
+    },
+    {
+      "baby_card_id": 418,
+      "baby_id": 4,
+      "card_id": 60,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 16,
+      "category_name": "가족",
+      "category_id": 1
+    },
+    {
+      "baby_card_id": 419,
+      "baby_id": 4,
+      "card_id": 29,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 10,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 420,
+      "baby_id": 4,
+      "card_id": 89,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 8,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 421,
+      "baby_id": 4,
+      "card_id": null,
+      "text": "숙제",
+      "part_of_speech": "noun",
+      "is_favorite": false,
+      "source": "parent_manual",
+      "status": "add",
+      "usage_count": 14,
+      "category_name": "물건",
+      "category_id": 6
+    },
+    {
+      "baby_card_id": 422,
+      "baby_id": 4,
+      "card_id": null,
+      "text": "발표",
+      "part_of_speech": "noun",
+      "is_favorite": false,
+      "source": "parent_manual",
+      "status": "add",
+      "usage_count": 8,
+      "category_name": "물건",
+      "category_id": 6
+    },
+    {
+      "baby_card_id": 423,
+      "baby_id": 4,
+      "card_id": null,
+      "text": "칭찬받고싶어",
+      "part_of_speech": "adjective",
+      "is_favorite": false,
+      "source": "parent_manual",
+      "status": "add",
+      "usage_count": 6,
+      "category_name": "감정",
+      "category_id": 3
+    },
+    {
+      "baby_card_id": 501,
+      "baby_id": 5,
+      "card_id": 59,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": true,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 50,
+      "category_name": "가족",
+      "category_id": 1
+    },
+    {
+      "baby_card_id": 502,
+      "baby_id": 5,
+      "card_id": 60,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": true,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 40,
+      "category_name": "가족",
+      "category_id": 1
+    },
+    {
+      "baby_card_id": 503,
+      "baby_id": 5,
+      "card_id": 2,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": true,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 45,
+      "category_name": "음식/음료",
+      "category_id": 2
+    },
+    {
+      "baby_card_id": 504,
+      "baby_id": 5,
+      "card_id": 1,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": true,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 38,
+      "category_name": "음식/음료",
+      "category_id": 2
+    },
+    {
+      "baby_card_id": 505,
+      "baby_id": 5,
+      "card_id": 28,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": true,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 42,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 506,
+      "baby_id": 5,
+      "card_id": 22,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 20,
+      "category_name": "감정",
+      "category_id": 3
+    },
+    {
+      "baby_card_id": 507,
+      "baby_id": 5,
+      "card_id": 15,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 14,
+      "category_name": "감정",
+      "category_id": 3
+    },
+    {
+      "baby_card_id": 508,
+      "baby_id": 5,
+      "card_id": 21,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 18,
+      "category_name": "감정",
+      "category_id": 3
+    },
+    {
+      "baby_card_id": 509,
+      "baby_id": 5,
+      "card_id": 48,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 16,
+      "category_name": "장소",
+      "category_id": 5
+    },
+    {
+      "baby_card_id": 510,
+      "baby_id": 5,
+      "card_id": 29,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 12,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 511,
+      "baby_id": 5,
+      "card_id": 24,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 10,
+      "category_name": "감정",
+      "category_id": 3
+    },
+    {
+      "baby_card_id": 512,
+      "baby_id": 5,
+      "card_id": 3,
+      "text": null,
+      "part_of_speech": null,
+      "is_favorite": false,
+      "source": "system_default",
+      "status": "default",
+      "usage_count": 20,
+      "category_name": "음식/음료",
+      "category_id": 2
+    },
+    {
+      "baby_card_id": 513,
+      "baby_id": 5,
+      "card_id": null,
+      "text": "무서워요",
+      "part_of_speech": "adjective",
+      "is_favorite": false,
+      "source": "parent_manual",
+      "status": "add",
+      "usage_count": 8,
+      "category_name": "감정",
+      "category_id": 3
+    },
+    {
+      "baby_card_id": 514,
+      "baby_id": 5,
+      "card_id": null,
+      "text": "같이놀자",
+      "part_of_speech": "verb",
+      "is_favorite": false,
+      "source": "parent_manual",
+      "status": "add",
+      "usage_count": 6,
+      "category_name": "놀이",
+      "category_id": 4
+    },
+    {
+      "baby_card_id": 515,
+      "baby_id": 5,
+      "card_id": null,
+      "text": "뽀뽀",
+      "part_of_speech": "noun",
+      "is_favorite": true,
+      "source": "parent_manual",
+      "status": "add",
+      "usage_count": 10,
+      "category_name": "음식/음료",
+      "category_id": 2
+    }
+  ]
+}
