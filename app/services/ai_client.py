@@ -91,3 +91,24 @@ async def fetch_sentence(payload: SentenceGenerateRequest) -> dict:
     except Exception as exc:
         logger.warning("AI /sentence 호출 실패, fallback 문장을 반환합니다: %s", exc)
         return _fallback_sentence(payload, f"fallback: {exc}")
+
+
+async def fetch_related_words(text: str, count: int, exclude: list[str]) -> list[dict]:
+    """
+    부모 단어추가용 관련 단어(DB 에 없는 새 단어) 후보. AI 서버 /related-words 프록시.
+    GPT 키가 없거나 실패하면 빈 목록(생성형이라 fallback 으론 새 단어 생성 불가).
+    """
+    if settings.use_mock_ai:
+        return []
+
+    try:
+        async with httpx.AsyncClient(timeout=_AI_TIMEOUT) as client:
+            response = await client.post(
+                f"{settings.ai_server_url}/related-words",
+                json={"text": text, "count": count, "exclude": exclude},
+            )
+            response.raise_for_status()
+            return response.json().get("related_words", [])
+    except Exception as exc:
+        logger.warning("AI /related-words 호출 실패: %s", exc)
+        return []

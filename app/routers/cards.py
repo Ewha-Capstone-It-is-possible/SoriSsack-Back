@@ -10,10 +10,49 @@ from app.models import (
     CardCategoryMapMaster,
     CardMaster,
 )
-from app.schemas import CardCategoryOut, CardOut, SuccessResponse
+from app.schemas import (
+    CardCategoryOut,
+    CardOut,
+    SuccessResponse,
+    SuggestWordsRequest,
+)
+from app.services.ai_client import fetch_related_words
 
 
 router = APIRouter(prefix="/cards", tags=["cards"])
+
+
+@router.post("/suggest", response_model=SuccessResponse)
+async def suggest_words(payload: SuggestWordsRequest, db: Session = Depends(get_db)):
+    """
+    부모 '단어 추가'용 관련 단어 추천. 입력 텍스트와 관련된, **DB 에 아직 없는** 새 단어를
+    AI(GPT)로 제안한다. 이미 카드로 있는 단어는 제외한다.
+    """
+    existing: set[str] = set()
+    for (text,) in db.query(CardMaster.base_text).all():
+        if text:
+            existing.add(text.strip())
+    baby_card_query = db.query(BabyCard.text).filter(BabyCard.text.isnot(None))
+    if payload.baby_id is not None:
+        baby_card_query = baby_card_query.filter(BabyCard.baby_id == payload.baby_id)
+    for (text,) in baby_card_query.all():
+        if text:
+            existing.add(text.strip())
+
+    items = await fetch_related_words(
+        text=payload.text, count=payload.count, exclude=sorted(existing)
+    )
+    # 안전 필터: DB 에 없는 새 단어만 남김
+    suggestions = [
+        {"text": w.get("text"), "pos": w.get("pos")}
+        for w in items
+        if w.get("text") and w["text"].strip() not in existing
+    ]
+
+    return SuccessResponse(
+        data={"text": payload.text, "suggestions": suggestions},
+        message="관련 단어를 추천했습니다.",
+    )
 
 
 @router.get("/{baby_id}", response_model=SuccessResponse)

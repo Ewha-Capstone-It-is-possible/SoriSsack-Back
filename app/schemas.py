@@ -54,6 +54,7 @@ class CardOut(BaseModel):
 class RecommendationRequest(BaseModel):
     baby_id: int
     selected_baby_card_id: Optional[int] = None
+    selected_card_id: Optional[int] = None   # 공용(마스터) 카드 선택 시
 
 
 class RecommendedWord(BaseModel):
@@ -88,6 +89,19 @@ class SentenceOut(BaseModel):
     avatar_image_url: Optional[str] = None
     avatar_audio_url: Optional[str] = None
     created_at: datetime
+
+
+class SuggestWordsRequest(BaseModel):
+    """부모 단어추가용: 입력 텍스트와 관련된 'DB 에 없는' 새 단어 제안."""
+
+    text: str = Field(..., min_length=1)
+    baby_id: Optional[int] = None
+    count: int = 6
+
+
+class SuggestedWord(BaseModel):
+    text: str
+    pos: Optional[str] = None
 
 
 class SentenceWordItem(BaseModel):
