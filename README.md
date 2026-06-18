@@ -1,7 +1,17 @@
 # SoriSsack Backend
 
 무발화 자폐 아동을 위한 AAC 서비스 **소리싹(SoriSsack)** 의 백엔드 API 서버입니다.  
-이 서버는 프론트엔드와 AI 서버 사이의 중간 계층으로 동작하며, 카드 조회, 단어 추천, 사용 로그 저장, 문장 생성 결과 저장, 설정, 리포트, 보상, 보호자 인증 기능을 제공합니다.
+이 서버는 프론트엔드와 AI 서버 사이의 중간 계층으로 동작하며, 카드 조회, 단어 추천, 사용 로그 저장, 문장 생성 결과 저장, 설정, 리포트, 감정일기, 보상, 보호자 인증 기능을 제공합니다.
+
+### 프로젝트 저장소 구성 (3개 저장소)
+
+소리싹 프로젝트는 다음 3개 저장소로 구성됩니다.
+
+- **SoriSsack-Back** (이 저장소) — 백엔드 API 서버 (FastAPI, 포트 8000)
+- **SoriSsack-AI** — AI 추론 서버 (FastAPI, 포트 8001). 추천·멀티모달·리포트 생성을 담당하며 백엔드가 내부 호출합니다.
+- **SoriSsak-FE** — 프론트엔드 앱 (React Native / Expo)
+
+프론트는 백엔드만 호출하고, 백엔드가 AI 서버를 내부 호출하는 구조입니다.
 
 
 ## 1. Project Description
@@ -75,12 +85,14 @@ Backend/
   - 카드/카테고리 조회
   - 추천 단어 요청
   - 카드 사용 로그 저장
-  - 문장 생성/저장
+  - 문장 생성/저장 (멀티모달 — 아동별 선호 색상이 반영된 캐릭터 이미지 + 음성 생성, AI 서버 연동)
+  - 부모 단어 추가 시 아동별 개인화 카드 이미지 자동 생성 (`POST /api/v1/cards`, AI 서버 연동)
 
 - 확장 기능
   - 설정 저장/조회
   - 마이페이지 요약
-  - 발달 리포트 조회/PDF 다운로드
+  - 발달 리포트 조회/PDF 다운로드 (통계 + GPT 자연어 해석 + 그래프 PNG 이미지, AI 서버 연동)
+  - 감정일기 조회 (`GET /api/v1/reports/{baby_id}/diary` — 그날 사용 기록을 GPT가 일기로 생성)
   - 보상/배지 조회
 
 
@@ -219,6 +231,7 @@ http://127.0.0.1:8000/docs
 - `POST /api/v1/logs`
 - `POST /api/v1/expressions/generate`
 - `GET /api/v1/reports/{baby_id}`
+- `GET /api/v1/reports/{baby_id}/diary`
 - `GET /api/v1/mypage/{baby_id}`
 - `GET /api/v1/rewards/{baby_id}`
 
@@ -259,15 +272,20 @@ PYTHONPYCACHEPREFIX=/tmp/codex-pycache python3 -m compileall app
 
 ## 8. Database or Data Used
 
-### 기본 DB
+### 실제 운영 DB (배포 환경)
 
-- SQLite
-- 파일명: `sorissack.db`
+- **AWS RDS PostgreSQL** — 배포(EC2) 환경에서 **백엔드와 AI 서버가 동일한 RDS 인스턴스를 공유**합니다.
+  실제 아동·카드·로그·문장 데이터가 이 RDS에 저장되며, 두 서버는 같은 데이터를 바라봅니다.
+- DB 접속 정보는 `DATABASE_URL` 환경변수로 주입하며, 보안상 저장소에는 포함하지 않습니다.
 
-### 선택 DB
+### 재현/채점용 기본 DB (DB 없이 동작)
 
-- PostgreSQL
-- 예시 스키마: `schema_mvp_postgres.sql`
+- **SQLite** (`sorissack.db`) — 별도 DB 서버 없이 clone 후 바로 실행할 수 있도록 기본값으로 제공합니다.
+  채점자는 RDS 접근 권한 없이도 `seed_sample_data`로 샘플 데이터를 적재해 전체 흐름을 재현할 수 있습니다.
+- PostgreSQL 스키마 예시: `schema_mvp_postgres.sql` (RDS와 동일 구조 재구성용)
+
+> 즉 **운영은 공유 RDS(PostgreSQL), 재현은 로컬 SQLite + 샘플 데이터**로 동작합니다.
+> (RDS 비밀번호는 공개 저장소에 올릴 수 없으므로, 재현 가능성을 위해 DB 없이 도는 기본 모드를 함께 제공합니다.)
 
 ### 주요 테이블
 
