@@ -9,7 +9,12 @@ from app.schemas import BabyOut, SuccessResponse
 router = APIRouter(prefix="/children", tags=["children"])
 
 
-@router.get("/{baby_id}", response_model=SuccessResponse)
+@router.get(
+    "/{baby_id}",
+    response_model=SuccessResponse[BabyOut],
+    summary="아동 정보 조회",
+    responses={404: {"description": "아동 정보를 찾을 수 없습니다."}},
+)
 def get_child(baby_id: int, db: Session = Depends(get_db)):
     baby = db.get(BabyBasicInformation, baby_id)
     if baby is None:

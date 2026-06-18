@@ -9,7 +9,12 @@ from app.schemas import CreateVocabLogRequest, SuccessResponse, VocabLogOut
 router = APIRouter(prefix="/logs", tags=["logs"])
 
 
-@router.post("", response_model=SuccessResponse)
+@router.post(
+    "",
+    response_model=SuccessResponse[VocabLogOut],
+    summary="단어 사용 로그 저장",
+    responses={404: {"description": "아동/카드 정보를 찾을 수 없습니다."}},
+)
 def create_vocab_log(payload: CreateVocabLogRequest, db: Session = Depends(get_db)):
     baby = db.get(BabyBasicInformation, payload.baby_id)
     if baby is None:

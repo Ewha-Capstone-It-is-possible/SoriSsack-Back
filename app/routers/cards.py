@@ -14,6 +14,7 @@ from app.schemas import (
     CardCategoryOut,
     CardOut,
     SuccessResponse,
+    SuggestionsData,
     SuggestWordsRequest,
 )
 from app.services.ai_client import fetch_related_words
@@ -22,7 +23,11 @@ from app.services.ai_client import fetch_related_words
 router = APIRouter(prefix="/cards", tags=["cards"])
 
 
-@router.post("/suggest", response_model=SuccessResponse)
+@router.post(
+    "/suggest",
+    response_model=SuccessResponse[SuggestionsData],
+    summary="부모 단어추가용 관련 단어 추천",
+)
 async def suggest_words(payload: SuggestWordsRequest, db: Session = Depends(get_db)):
     """
     부모 '단어 추가'용 관련 단어 추천. 입력 텍스트와 관련된, **DB 에 아직 없는** 새 단어를
@@ -55,7 +60,12 @@ async def suggest_words(payload: SuggestWordsRequest, db: Session = Depends(get_
     )
 
 
-@router.get("/{baby_id}", response_model=SuccessResponse)
+@router.get(
+    "/{baby_id}",
+    response_model=SuccessResponse[list[CardOut]],
+    summary="아동 카드 목록 조회",
+    responses={404: {"description": "아동 정보를 찾을 수 없습니다."}},
+)
 def get_cards(baby_id: int, db: Session = Depends(get_db)):
     baby = db.get(BabyBasicInformation, baby_id)
     if baby is None:
