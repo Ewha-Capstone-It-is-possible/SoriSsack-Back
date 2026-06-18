@@ -17,8 +17,10 @@ http://127.0.0.1:8000/api/v1
 http://127.0.0.1:8000/docs
 ```
 
-- 현재 인증 없음
-  - 별도 토큰 없이 바로 호출 가능
+- 로그인 API 제공
+  - 회원가입/로그인 후 `access_token` 발급 가능
+  - 현재 데이터 조회 API는 별도 토큰 강제 없이도 호출 가능
+  - 프론트에서는 이후 확장을 위해 로그인 응답의 `access_token`을 저장해두는 방식으로 붙이면 됨
 
 - 공통 응답 형식
 
@@ -48,6 +50,97 @@ http://127.0.0.1:8000/docs
 
 
 ## 3. 화면별 API 정리
+
+### 3-0. 로그인 / 부모 모드 진입
+
+#### `POST /auth/register`
+
+- 용도
+  - 보호자 계정 생성 후 바로 로그인 세션 발급
+
+- 요청 body 예시
+
+```json
+{
+  "baby_id": 3,
+  "parent_name": "김보호자",
+  "email": "parent@example.com",
+  "password": "sorissack123"
+}
+```
+
+- 응답에서 쓰는 필드
+  - `data.access_token`
+  - `data.token_type`
+  - `data.expires_at`
+  - `data.parent.parent_id`
+  - `data.parent.baby_id`
+  - `data.parent.parent_name`
+  - `data.parent.email`
+
+
+#### `POST /auth/login`
+
+- 용도
+  - 보호자 로그인
+
+- 요청 body 예시
+
+```json
+{
+  "email": "parent@example.com",
+  "password": "sorissack123"
+}
+```
+
+- 응답에서 쓰는 필드
+  - `data.access_token`
+  - `data.token_type`
+  - `data.expires_at`
+  - `data.parent`
+
+
+#### `GET /auth/me`
+
+- 용도
+  - 현재 로그인한 보호자 정보 조회
+
+- 요청 헤더
+
+```txt
+Authorization: Bearer {access_token}
+```
+
+
+#### `POST /auth/logout`
+
+- 용도
+  - 로그아웃
+
+- 요청 헤더
+
+```txt
+Authorization: Bearer {access_token}
+```
+
+
+#### `POST /auth/verify-pin`
+
+- 용도
+  - 부모 모드 진입 시 PIN 확인
+
+- 요청 body 예시
+
+```json
+{
+  "baby_id": 3,
+  "pin": "1234"
+}
+```
+
+- 응답에서 쓰는 필드
+  - `data.baby_id`
+  - `data.verified`
 
 ### 3-1. 홈 / 시작 화면
 
@@ -469,6 +562,7 @@ GET /rewards/3
 
 ### 1순위
 
+- `POST /auth/login`
 - `GET /cards/{baby_id}`
 - `POST /recommendations`
 - `POST /logs`
@@ -515,6 +609,9 @@ GET /rewards/3
 현재 로컬 테스트 기준 예시:
 
 - `baby_id = 3`
+- 보호자 로그인 예시
+  - `email = parent@example.com`
+  - `password = sorissack123`
 - 카드 예시
   - `baby_card_id = 301`
   - `card_id = 35`

@@ -206,6 +206,50 @@ class RewardsData(BaseModel):
     badges: list[BadgeOut]
 
 
+class ParentAccountOut(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    parent_id: int
+    baby_id: int
+    parent_name: str
+    email: str
+    is_active: bool
+    created_at: datetime
+
+
+class RegisterParentRequest(BaseModel):
+    baby_id: int
+    parent_name: str = Field(..., min_length=1, max_length=100)
+    email: str = Field(..., min_length=5, max_length=255)
+    password: str = Field(..., min_length=8, max_length=128)
+
+
+class LoginRequest(BaseModel):
+    email: str = Field(..., min_length=5, max_length=255)
+    password: str = Field(..., min_length=8, max_length=128)
+
+
+class AuthSessionData(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+    expires_at: datetime
+    parent: ParentAccountOut
+
+
+class LogoutData(BaseModel):
+    logged_out: bool
+
+
+class PinVerifyRequest(BaseModel):
+    baby_id: int
+    pin: str = Field(..., min_length=4, max_length=20)
+
+
+class PinVerifyData(BaseModel):
+    baby_id: int
+    verified: bool
+
+
 class SuggestWordsRequest(BaseModel):
     """부모 단어추가용: 입력 텍스트와 관련된 'DB 에 없는' 새 단어 제안."""
 

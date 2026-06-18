@@ -23,6 +23,7 @@ class BabyBasicInformation(Base):
     vocab_logs = relationship("BabyVocabLog", back_populates="baby")
     sentences = relationship("SentenceMaster", back_populates="baby")
     app_settings = relationship("BabyAppSettings", back_populates="baby", uselist=False)
+    parent_accounts = relationship("ParentAccount", back_populates="baby")
 
 
 class CardMaster(Base):
@@ -194,3 +195,34 @@ class BabyAppSettings(Base):
     )
 
     baby = relationship("BabyBasicInformation", back_populates="app_settings")
+
+
+class ParentAccount(Base):
+    __tablename__ = "parent_account"
+
+    parent_id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    baby_id: Mapped[int] = mapped_column(ForeignKey("baby_basic_information.baby_id"), nullable=False, index=True)
+    parent_name: Mapped[str] = mapped_column(String(100), nullable=False)
+    email: Mapped[str] = mapped_column(String(255), nullable=False, unique=True, index=True)
+    password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False
+    )
+
+    baby = relationship("BabyBasicInformation", back_populates="parent_accounts")
+    sessions = relationship("ParentSession", back_populates="parent")
+
+
+class ParentSession(Base):
+    __tablename__ = "parent_session"
+
+    session_id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    parent_id: Mapped[int] = mapped_column(ForeignKey("parent_account.parent_id"), nullable=False, index=True)
+    access_token: Mapped[str] = mapped_column(String(255), nullable=False, unique=True, index=True)
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    revoked_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+
+    parent = relationship("ParentAccount", back_populates="sessions")

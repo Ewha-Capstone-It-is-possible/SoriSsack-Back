@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
 from app.db import Base, engine
 from app.routers import (
+    auth,
     cards,
     categories,
     children,
@@ -22,6 +23,7 @@ Base.metadata.create_all(bind=engine)
 
 TAGS_METADATA = [
     {"name": "health", "description": "서버 헬스 체크"},
+    {"name": "auth", "description": "보호자 회원가입/로그인/세션/PIN 확인"},
     {"name": "children", "description": "아동 기본 정보 조회"},
     {"name": "cards", "description": "카드 목록 조회 + 부모 단어추가용 관련 단어 추천"},
     {"name": "categories", "description": "아동별 카테고리 목록 및 카테고리별 카드 조회"},
@@ -57,6 +59,7 @@ app.add_middleware(
 )
 
 app.include_router(health.router, prefix=settings.api_prefix)
+app.include_router(auth.router, prefix=settings.api_prefix)
 app.include_router(children.router, prefix=settings.api_prefix)
 app.include_router(cards.router, prefix=settings.api_prefix)
 app.include_router(categories.router, prefix=settings.api_prefix)
