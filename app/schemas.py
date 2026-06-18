@@ -191,6 +191,14 @@ class ReportSummaryData(BaseModel):
     insight: str
 
 
+class EmotionDiaryData(BaseModel):
+    baby_id: int
+    date: str
+    mood: str
+    diary: str
+    sentences: list[str] = Field(default_factory=list)
+
+
 class BadgeOut(BaseModel):
     key: str
     title: str

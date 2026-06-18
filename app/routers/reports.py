@@ -6,7 +6,13 @@ from sqlalchemy.orm import Session
 
 from app.db import get_db
 from app.models import BabyBasicInformation, BabyVocabLog, SentenceMaster
-from app.schemas import ReportSummaryData, SuccessResponse, TopWordOut
+from app.schemas import (
+    EmotionDiaryData,
+    ReportSummaryData,
+    SuccessResponse,
+    TopWordOut,
+)
+from app.services.ai_client import fetch_emotion_diary, fetch_report_insight
 
 
 router = APIRouter(prefix="/reports", tags=["reports"])
@@ -136,15 +142,105 @@ def _make_simple_pdf(lines: list[str]) -> bytes:
     summary="발달 리포트 조회",
     responses={404: {"description": "아동 정보를 찾을 수 없습니다."}},
 )
-def get_report(
+async def get_report(
     baby_id: int,
     days: int = Query(default=30, ge=1, le=365),
     db: Session = Depends(get_db),
 ):
     report = _report_payload(baby_id, days, db)
+
+    # 규칙기반 insight → GPT 자연어 해석으로 교체(실패 시 규칙기반 유지)
+    stats = {
+        "period_days": report.period_days,
+        "total_selections": report.total_selections,
+        "unique_words": report.unique_words,
+        "total_sentences": report.total_sentences,
+        "average_sentence_length": report.average_sentence_length,
+        "top_words": [{"text": w.text, "count": w.count} for w in report.top_words],
+        "emotion_counts": report.emotion_counts,
+        "recent_sentences": report.recent_sentences,
+    }
+    gpt_insight = await fetch_report_insight(stats)
+    if gpt_insight:
+        report.insight = gpt_insight
+
     return SuccessResponse(
         data=report,
         message="발달 리포트를 조회했습니다.",
+    )
+
+
+@router.get(
+    "/{baby_id}/diary",
+    response_model=SuccessResponse[EmotionDiaryData],
+    summary="감정일기 (그날 사용 기록 기반)",
+    responses={404: {"description": "아동 정보를 찾을 수 없습니다."}},
+)
+async def get_emotion_diary(
+    baby_id: int,
+    date: str = Query(default=None, description="YYYY-MM-DD (기본: 오늘)"),
+    db: Session = Depends(get_db),
+):
+    baby = db.get(BabyBasicInformation, baby_id)
+    if baby is None:
+        raise HTTPException(status_code=404, detail="아동 정보를 찾을 수 없습니다.")
+
+    # 대상 날짜(기본 오늘, UTC) 00:00~24:00
+    try:
+        day = datetime.strptime(date, "%Y-%m-%d") if date else datetime.utcnow()
+    except ValueError:
+        raise HTTPException(status_code=400, detail="date 형식은 YYYY-MM-DD 입니다.")
+    start = day.replace(hour=0, minute=0, second=0, microsecond=0)
+    end = start + timedelta(days=1)
+    date_str = start.strftime("%Y-%m-%d")
+
+    sentences = (
+        db.query(SentenceMaster)
+        .filter(
+            SentenceMaster.baby_id == baby_id,
+            SentenceMaster.created_at >= start,
+            SentenceMaster.created_at < end,
+        )
+        .order_by(SentenceMaster.created_at.asc())
+        .all()
+    )
+    logs = (
+        db.query(BabyVocabLog)
+        .filter(
+            BabyVocabLog.baby_id == baby_id,
+            BabyVocabLog.used_at >= start,
+            BabyVocabLog.used_at < end,
+        )
+        .all()
+    )
+
+    sentence_texts = [s.sentence_text for s in sentences if s.sentence_text]
+    word_counter = Counter(l.text_snapshot.strip() for l in logs if l.text_snapshot and l.text_snapshot.strip())
+    emotions: Counter[str] = Counter()
+    for l in logs:
+        if isinstance(l.context_json, dict):
+            e = l.context_json.get("emotion") or l.context_json.get("mood")
+            if e:
+                emotions[str(e)] += 1
+
+    ai = await fetch_emotion_diary({
+        "date": date_str,
+        "sentences": sentence_texts,
+        "top_words": [w for w, _ in word_counter.most_common(5)],
+        "emotions": dict(emotions),
+    })
+    if not ai:
+        ai = {"mood": "편안",
+              "diary": "오늘은 조용한 하루였어요." if not sentence_texts
+                       else "오늘 아이가 여러 표현으로 마음을 전했어요."}
+
+    return SuccessResponse(
+        data=EmotionDiaryData(
+            baby_id=baby_id, date=date_str,
+            mood=ai.get("mood", "차분"), diary=ai.get("diary", ""),
+            sentences=sentence_texts[:5],
+        ),
+        message="감정일기를 생성했습니다.",
     )
 
 

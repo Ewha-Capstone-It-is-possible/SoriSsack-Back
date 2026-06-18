@@ -94,6 +94,34 @@ async def fetch_sentence(payload: SentenceGenerateRequest) -> dict:
         return _fallback_sentence(payload, f"fallback: {exc}")
 
 
+async def fetch_report_insight(stats: dict) -> Optional[str]:
+    """리포트 통계 → GPT 자연어 해석. 실패하면 None(규칙기반 유지)."""
+    if settings.use_mock_ai:
+        return None
+    try:
+        async with httpx.AsyncClient(timeout=_AI_TIMEOUT) as client:
+            r = await client.post(f"{settings.ai_server_url}/report/insight", json={"stats": stats})
+            r.raise_for_status()
+            return r.json().get("insight")
+    except Exception as exc:
+        logger.warning("AI /report/insight 호출 실패: %s", exc)
+        return None
+
+
+async def fetch_emotion_diary(payload: dict) -> Optional[dict]:
+    """그날 사용 기록 → 감정일기 {mood, diary}. 실패하면 None."""
+    if settings.use_mock_ai:
+        return None
+    try:
+        async with httpx.AsyncClient(timeout=_AI_TIMEOUT) as client:
+            r = await client.post(f"{settings.ai_server_url}/emotion-diary", json=payload)
+            r.raise_for_status()
+            return r.json()
+    except Exception as exc:
+        logger.warning("AI /emotion-diary 호출 실패: %s", exc)
+        return None
+
+
 async def fetch_card_image(text: str, baby_id: int) -> Optional[str]:
     """단어카드 개인화 이미지(아이별 캐릭터가 그 단어를 보여줌). AI /image kind=word.
     실패하면 None(카드는 이미지 없이 생성)."""
