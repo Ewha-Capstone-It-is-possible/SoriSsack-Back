@@ -276,6 +276,7 @@ class SentenceGenerateRequest(BaseModel):
     baby_id: int
     words: list[SentenceWordItem] = Field(..., min_length=1)
     emotion: Optional[str] = "neutral"
+    favorite_color: Optional[str] = None   # 아이가 좋아하는 색 → 캐릭터 셔츠(pink/blue/green...)
     save: bool = True   # 생성 결과를 sentence_master 에 저장할지
 
 
