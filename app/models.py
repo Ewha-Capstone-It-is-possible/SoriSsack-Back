@@ -7,10 +7,34 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.db import Base
 
 
+class Parent(Base):
+    """부모(= 로그인 사용자). 아이디/비밀번호 또는 카카오로 로그인한다."""
+
+    __tablename__ = "parent"
+
+    parent_id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    user_id: Mapped[Optional[str]] = mapped_column(String(50), unique=True, index=True, nullable=True)
+    password_hash: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
+    parent_name: Mapped[str] = mapped_column(String(100), nullable=False)
+    email: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
+    phone_number: Mapped[Optional[str]] = mapped_column(String(30), nullable=True)
+    provider: Mapped[str] = mapped_column(String(20), default="local", nullable=False)  # local | kakao
+    kakao_id: Mapped[Optional[str]] = mapped_column(String(50), unique=True, index=True, nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False
+    )
+
+    babies = relationship("BabyBasicInformation", back_populates="parent")
+
+
 class BabyBasicInformation(Base):
     __tablename__ = "baby_basic_information"
 
     baby_id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    parent_id: Mapped[Optional[int]] = mapped_column(
+        ForeignKey("parent.parent_id"), nullable=True, index=True
+    )
     baby_name: Mapped[str] = mapped_column(String(100), nullable=False)
     sex: Mapped[str] = mapped_column(String(1), nullable=False)
     birth: Mapped[datetime] = mapped_column(DateTime, nullable=False)
@@ -19,6 +43,7 @@ class BabyBasicInformation(Base):
         DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False
     )
 
+    parent = relationship("Parent", back_populates="babies")
     baby_cards = relationship("BabyCard", back_populates="baby")
     vocab_logs = relationship("BabyVocabLog", back_populates="baby")
     sentences = relationship("SentenceMaster", back_populates="baby")

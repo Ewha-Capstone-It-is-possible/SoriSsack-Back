@@ -1,9 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy import inspect, text
 
 from app.core.config import settings
 from app.db import Base, engine
 from app.routers import (
+    auth,
     cards,
     categories,
     children,
@@ -14,9 +16,28 @@ from app.routers import (
 )
 
 
+def _ensure_parent_id_column() -> None:
+    """기존 baby_basic_information 에 parent_id 컬럼이 없으면 추가(간이 마이그레이션).
+
+    create_all 은 새 테이블(parent)만 만들고 기존 테이블 컬럼은 추가하지 않으므로,
+    이미 존재하는 RDS/sqlite 테이블에 parent_id 를 ALTER 로 보강한다.
+    """
+    inspector = inspect(engine)
+    if "baby_basic_information" not in inspector.get_table_names():
+        return
+    columns = {c["name"] for c in inspector.get_columns("baby_basic_information")}
+    if "parent_id" not in columns:
+        with engine.begin() as conn:
+            conn.execute(
+                text("ALTER TABLE baby_basic_information ADD COLUMN parent_id INTEGER")
+            )
+
+
 Base.metadata.create_all(bind=engine)
+_ensure_parent_id_column()
 
 TAGS_METADATA = [
+    {"name": "auth", "description": "회원가입 / 로그인 / 카카오 / 내 정보 — JWT 발급"},
     {"name": "health", "description": "서버 헬스 체크"},
     {"name": "children", "description": "아동 기본 정보 조회"},
     {"name": "cards", "description": "카드 목록 조회 + 부모 단어추가용 관련 단어 추천"},
@@ -47,6 +68,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(auth.router, prefix=settings.api_prefix)
 app.include_router(health.router, prefix=settings.api_prefix)
 app.include_router(children.router, prefix=settings.api_prefix)
 app.include_router(cards.router, prefix=settings.api_prefix)

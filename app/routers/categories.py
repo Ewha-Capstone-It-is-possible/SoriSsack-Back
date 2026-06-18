@@ -1,14 +1,15 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
+from app.core.deps import get_current_parent, get_owned_baby
 from app.db import get_db
 from app.models import (
-    BabyBasicInformation,
     BabyCard,
     BabyCardCategoryMap,
     BabyCategory,
     CardCategoryMapMaster,
     CardMaster,
+    Parent,
 )
 from app.schemas import CardCategoryOut, CardOut, CategoryCardsOut, CategoryOut, SuccessResponse
 
@@ -25,12 +26,22 @@ def _category_out_from_baby_category(bcat: BabyCategory) -> CardCategoryOut:
     )
 
 
-@router.get("/{baby_id}", response_model=SuccessResponse)
-def list_categories(baby_id: int, db: Session = Depends(get_db)):
+@router.get(
+    "/{baby_id}",
+    response_model=SuccessResponse[list[CategoryOut]],
+    summary="아동 카테고리 목록 (로그인 필요)",
+    responses={
+        403: {"description": "이 아동에 접근할 권한이 없습니다."},
+        404: {"description": "아동 정보를 찾을 수 없습니다."},
+    },
+)
+def list_categories(
+    baby_id: int,
+    parent: Parent = Depends(get_current_parent),
+    db: Session = Depends(get_db),
+):
     """아동에게 활성화된 카테고리 목록."""
-    baby = db.get(BabyBasicInformation, baby_id)
-    if baby is None:
-        raise HTTPException(status_code=404, detail="아동 정보를 찾을 수 없습니다.")
+    get_owned_baby(baby_id, parent, db)
 
     rows = (
         db.query(BabyCategory)
@@ -53,12 +64,23 @@ def list_categories(baby_id: int, db: Session = Depends(get_db)):
     return SuccessResponse(data=result, message="카테고리 목록을 조회했습니다.")
 
 
-@router.get("/{baby_id}/{baby_category_id}/cards", response_model=SuccessResponse)
-def cards_in_category(baby_id: int, baby_category_id: int, db: Session = Depends(get_db)):
+@router.get(
+    "/{baby_id}/{baby_category_id}/cards",
+    response_model=SuccessResponse[CategoryCardsOut],
+    summary="카테고리별 카드 목록 (로그인 필요)",
+    responses={
+        403: {"description": "이 아동에 접근할 권한이 없습니다."},
+        404: {"description": "아동/카테고리를 찾을 수 없습니다."},
+    },
+)
+def cards_in_category(
+    baby_id: int,
+    baby_category_id: int,
+    parent: Parent = Depends(get_current_parent),
+    db: Session = Depends(get_db),
+):
     """카테고리에 속한 카드. 개인 카드 우선, 부족분은 card_master fallback."""
-    baby = db.get(BabyBasicInformation, baby_id)
-    if baby is None:
-        raise HTTPException(status_code=404, detail="아동 정보를 찾을 수 없습니다.")
+    get_owned_baby(baby_id, parent, db)
 
     bcat = db.get(BabyCategory, baby_category_id)
     if bcat is None or bcat.baby_id != baby_id:

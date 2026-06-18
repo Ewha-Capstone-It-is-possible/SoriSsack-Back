@@ -1,8 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
+from app.core.deps import get_current_parent, get_owned_baby
 from app.db import get_db
-from app.models import BabyBasicInformation, BabyCard, BabyVocabLog
+from app.models import BabyCard, BabyVocabLog, Parent
 from app.schemas import CreateVocabLogRequest, SuccessResponse, VocabLogOut
 
 
@@ -12,13 +13,18 @@ router = APIRouter(prefix="/logs", tags=["logs"])
 @router.post(
     "",
     response_model=SuccessResponse[VocabLogOut],
-    summary="단어 사용 로그 저장",
-    responses={404: {"description": "아동/카드 정보를 찾을 수 없습니다."}},
+    summary="단어 사용 로그 저장 (로그인 필요)",
+    responses={
+        403: {"description": "이 아동에 접근할 권한이 없습니다."},
+        404: {"description": "아동/카드 정보를 찾을 수 없습니다."},
+    },
 )
-def create_vocab_log(payload: CreateVocabLogRequest, db: Session = Depends(get_db)):
-    baby = db.get(BabyBasicInformation, payload.baby_id)
-    if baby is None:
-        raise HTTPException(status_code=404, detail="아동 정보를 찾을 수 없습니다.")
+def create_vocab_log(
+    payload: CreateVocabLogRequest,
+    parent: Parent = Depends(get_current_parent),
+    db: Session = Depends(get_db),
+):
+    get_owned_baby(payload.baby_id, parent, db)
 
     if payload.baby_card_id is not None:
         baby_card = db.get(BabyCard, payload.baby_card_id)

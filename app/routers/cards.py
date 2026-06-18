@@ -1,15 +1,16 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
+from app.core.deps import get_current_parent, get_owned_baby
 from app.db import get_db
 from app.models import (
-    BabyBasicInformation,
     BabyCard,
     BabyCardCategoryMap,
     BabyCategory,
     CardCategoryMapMaster,
     CardMaster,
     CategoryMaster,
+    Parent,
 )
 from app.schemas import (
     CardCategoryOut,
@@ -27,13 +28,20 @@ router = APIRouter(prefix="/cards", tags=["cards"])
 @router.post(
     "/suggest",
     response_model=SuccessResponse[SuggestionsData],
-    summary="부모 단어추가용 관련 단어 추천",
+    summary="부모 단어추가용 관련 단어 추천 (로그인 필요)",
 )
-async def suggest_words(payload: SuggestWordsRequest, db: Session = Depends(get_db)):
+async def suggest_words(
+    payload: SuggestWordsRequest,
+    parent: Parent = Depends(get_current_parent),
+    db: Session = Depends(get_db),
+):
     """
     부모 '단어 추가'용 관련 단어 추천. 입력 텍스트와 관련된, **DB 에 아직 없는** 새 단어를
     AI(GPT)로 제안한다. 이미 카드로 있는 단어는 제외한다.
     """
+    if payload.baby_id is not None:
+        get_owned_baby(payload.baby_id, parent, db)
+
     existing: set[str] = set()
     for (text,) in db.query(CardMaster.base_text).all():
         if text:
@@ -64,13 +72,18 @@ async def suggest_words(payload: SuggestWordsRequest, db: Session = Depends(get_
 @router.get(
     "/{baby_id}",
     response_model=SuccessResponse[list[CardOut]],
-    summary="아동 카드 목록 조회",
-    responses={404: {"description": "아동 정보를 찾을 수 없습니다."}},
+    summary="아동 카드 목록 조회 (로그인 필요)",
+    responses={
+        403: {"description": "이 아동에 접근할 권한이 없습니다."},
+        404: {"description": "아동 정보를 찾을 수 없습니다."},
+    },
 )
-def get_cards(baby_id: int, db: Session = Depends(get_db)):
-    baby = db.get(BabyBasicInformation, baby_id)
-    if baby is None:
-        raise HTTPException(status_code=404, detail="아동 정보를 찾을 수 없습니다.")
+def get_cards(
+    baby_id: int,
+    parent: Parent = Depends(get_current_parent),
+    db: Session = Depends(get_db),
+):
+    get_owned_baby(baby_id, parent, db)
 
     baby_cards = (
         db.query(BabyCard)

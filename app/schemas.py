@@ -203,6 +203,78 @@ class AvatarResult(BaseModel):
     image_url: Optional[str] = None
 
 
+# =======================================================
+# 인증 (회원가입 / 로그인 / 카카오)
+# =======================================================
+class SignupRequest(BaseModel):
+    parent_name: str = Field(..., min_length=1, description="부모 이름")
+    user_id: str = Field(..., min_length=4, max_length=50, description="로그인 아이디")
+    password: str = Field(..., min_length=4, description="비밀번호")
+    email: Optional[str] = Field(None, description="이메일")
+    phone_number: Optional[str] = Field(None, description="핸드폰 번호")
+
+    model_config = ConfigDict(
+        json_schema_extra={
+            "example": {
+                "parent_name": "홍길동",
+                "user_id": "gildong01",
+                "password": "secret123",
+                "email": "gildong@example.com",
+                "phone_number": "010-1234-5678",
+            }
+        }
+    )
+
+
+class LoginRequest(BaseModel):
+    user_id: str = Field(..., description="로그인 아이디")
+    password: str = Field(..., description="비밀번호")
+
+    model_config = ConfigDict(
+        json_schema_extra={"example": {"user_id": "gildong01", "password": "secret123"}}
+    )
+
+
+class KakaoLoginRequest(BaseModel):
+    """카카오 로그인: 프론트가 카카오 SDK 로 받은 access token 을 전달."""
+    kakao_access_token: str = Field(..., description="카카오 SDK 가 발급한 access token")
+
+
+class CheckIdData(BaseModel):
+    user_id: str
+    available: bool  # True=사용 가능(중복 없음)
+
+
+class ParentOut(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    parent_id: int
+    user_id: Optional[str] = None
+    parent_name: str
+    email: Optional[str] = None
+    phone_number: Optional[str] = None
+    provider: str
+
+
+class TokenData(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+    parent: ParentOut
+
+
+class CreateBabyRequest(BaseModel):
+    """온보딩: 로그인한 부모가 자기 아이를 등록."""
+    baby_name: str = Field(..., min_length=1)
+    sex: str = Field(..., min_length=1, max_length=1, description="M | F")
+    birth: datetime
+
+    model_config = ConfigDict(
+        json_schema_extra={
+            "example": {"baby_name": "민준", "sex": "M", "birth": "2020-03-15T00:00:00"}
+        }
+    )
+
+
 class GeneratedExpressionData(BaseModel):
     """`POST /expressions/generate` 의 data — 멀티모달 '말하기' 결과."""
     baby_id: int
