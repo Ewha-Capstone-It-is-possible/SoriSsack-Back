@@ -23,7 +23,7 @@ from app.schemas import (
     SuggestWordsRequest,
     UpdateCardRequest,
 )
-from app.services.ai_client import fetch_related_words
+from app.services.ai_client import fetch_card_image, fetch_related_words
 
 
 router = APIRouter(prefix="/cards", tags=["cards"])
@@ -230,7 +230,7 @@ async def suggest_words(payload: SuggestWordsRequest, db: Session = Depends(get_
     summary="사용자 정의 카드 생성",
     responses={404: {"description": "아동 정보를 찾을 수 없습니다."}},
 )
-def create_custom_card(payload: CreateCustomCardRequest, db: Session = Depends(get_db)):
+async def create_custom_card(payload: CreateCustomCardRequest, db: Session = Depends(get_db)):
     _get_baby_or_404(payload.baby_id, db)
 
     baby_card = BabyCard(
@@ -246,6 +246,12 @@ def create_custom_card(payload: CreateCustomCardRequest, db: Session = Depends(g
     )
     db.add(baby_card)
     db.flush()
+
+    # 이미지 미지정 시: 아이별 개인화 이미지를 AI(SD)로 생성 → 아이모드 카드에 표시
+    if not payload.image_url:
+        generated_url = await fetch_card_image(baby_card.text, payload.baby_id)
+        if generated_url:
+            baby_card.custom_image_url = generated_url
 
     baby_category = _get_or_create_baby_category(
         db=db,

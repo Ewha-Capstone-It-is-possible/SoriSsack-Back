@@ -11,6 +11,7 @@ AI 추론 서버(sorisak-ai, FastAPI) 호출 클라이언트.
 """
 
 import logging
+from typing import Optional
 
 import httpx
 
@@ -91,6 +92,24 @@ async def fetch_sentence(payload: SentenceGenerateRequest) -> dict:
     except Exception as exc:
         logger.warning("AI /sentence 호출 실패, fallback 문장을 반환합니다: %s", exc)
         return _fallback_sentence(payload, f"fallback: {exc}")
+
+
+async def fetch_card_image(text: str, baby_id: int) -> Optional[str]:
+    """단어카드 개인화 이미지(아이별 캐릭터가 그 단어를 보여줌). AI /image kind=word.
+    실패하면 None(카드는 이미지 없이 생성)."""
+    if settings.use_mock_ai:
+        return None
+    try:
+        async with httpx.AsyncClient(timeout=_AI_TIMEOUT) as client:
+            response = await client.post(
+                f"{settings.ai_server_url}/image",
+                json={"sentence": text, "baby_id": baby_id, "kind": "word"},
+            )
+            response.raise_for_status()
+            return response.json().get("image_url")
+    except Exception as exc:
+        logger.warning("AI /image(단어카드) 호출 실패: %s", exc)
+        return None
 
 
 async def fetch_related_words(text: str, count: int, exclude: list[str]) -> list[dict]:
