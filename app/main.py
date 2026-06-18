@@ -10,7 +10,11 @@ from app.routers import (
     expressions,
     health,
     logs,
+    mypage,
     recommendations,
+    reports,
+    rewards,
+    settings as baby_settings,
 )
 
 
@@ -20,9 +24,14 @@ TAGS_METADATA = [
     {"name": "health", "description": "서버 헬스 체크"},
     {"name": "children", "description": "아동 기본 정보 조회"},
     {"name": "cards", "description": "카드 목록 조회 + 부모 단어추가용 관련 단어 추천"},
+    {"name": "categories", "description": "아동별 카테고리 목록 및 카테고리별 카드 조회"},
     {"name": "recommendations", "description": "다음 단어 추천 (AI 서버 프록시)"},
     {"name": "expressions", "description": "‘말하기’ 멀티모달 문장 생성·저장 (AI 서버 프록시)"},
     {"name": "logs", "description": "단어 사용 로그 적재"},
+    {"name": "settings", "description": "아동별 앱 설정 및 온보딩 성격의 개인화 정보 저장"},
+    {"name": "mypage", "description": "마이페이지 요약 정보 조회"},
+    {"name": "reports", "description": "로그 기반 발달 리포트 조회 및 PDF 다운로드"},
+    {"name": "rewards", "description": "보상 포인트 및 배지 현황 조회"},
 ]
 
 app = FastAPI(
@@ -54,6 +63,10 @@ app.include_router(categories.router, prefix=settings.api_prefix)
 app.include_router(recommendations.router, prefix=settings.api_prefix)
 app.include_router(expressions.router, prefix=settings.api_prefix)
 app.include_router(logs.router, prefix=settings.api_prefix)
+app.include_router(baby_settings.router, prefix=settings.api_prefix)
+app.include_router(mypage.router, prefix=settings.api_prefix)
+app.include_router(reports.router, prefix=settings.api_prefix)
+app.include_router(rewards.router, prefix=settings.api_prefix)
 
 
 @app.get("/")

@@ -60,6 +60,31 @@ class CardOut(BaseModel):
     category: Optional[CardCategoryOut] = None
 
 
+class CreateCustomCardRequest(BaseModel):
+    baby_id: int
+    text: str = Field(..., min_length=1, max_length=255)
+    part_of_speech: Optional[str] = Field(default="noun", max_length=20)
+    image_url: Optional[str] = Field(default=None, max_length=500)
+    is_favorite: bool = False
+    category_name: Optional[str] = Field(default=None, max_length=100)
+    baby_category_id: Optional[int] = None
+
+
+class UpdateCardRequest(BaseModel):
+    text: Optional[str] = Field(default=None, min_length=1, max_length=255)
+    part_of_speech: Optional[str] = Field(default=None, max_length=20)
+    image_url: Optional[str] = Field(default=None, max_length=500)
+    is_favorite: Optional[bool] = None
+    status: Optional[str] = Field(default=None, max_length=50)
+    is_active: Optional[bool] = None
+    category_name: Optional[str] = Field(default=None, max_length=100)
+    baby_category_id: Optional[int] = None
+
+
+class FavoriteUpdateRequest(BaseModel):
+    is_favorite: bool
+
+
 class CategoryOut(BaseModel):
     baby_category_id: int
     category_id: Optional[int] = None
@@ -113,6 +138,72 @@ class SentenceOut(BaseModel):
     avatar_image_url: Optional[str] = None
     avatar_audio_url: Optional[str] = None
     created_at: datetime
+
+
+class BabySettingsOut(BaseModel):
+    baby_id: int
+    parent_pin_enabled: bool
+    tts_voice: str
+    tts_speed: float
+    reward_enabled: bool
+    communication_level: Optional[str] = None
+    favorite_topics: list[str] = Field(default_factory=list)
+    sensory_notes: Optional[str] = None
+    avatar_name: Optional[str] = None
+
+
+class UpdateBabySettingsRequest(BaseModel):
+    parent_pin: Optional[str] = Field(default=None, max_length=20)
+    tts_voice: Optional[str] = Field(default=None, max_length=50)
+    tts_speed: Optional[float] = Field(default=None, ge=0.5, le=2.0)
+    reward_enabled: Optional[bool] = None
+    communication_level: Optional[str] = Field(default=None, max_length=50)
+    favorite_topics: Optional[list[str]] = None
+    sensory_notes: Optional[str] = None
+    avatar_name: Optional[str] = Field(default=None, max_length=100)
+
+
+class MyPageSummaryData(BaseModel):
+    baby: BabyOut
+    settings: BabySettingsOut
+    total_cards: int
+    favorite_cards: int
+    total_logs: int
+    total_sentences: int
+    latest_sentence: Optional[str] = None
+
+
+class TopWordOut(BaseModel):
+    text: str
+    count: int
+
+
+class ReportSummaryData(BaseModel):
+    baby_id: int
+    period_days: int
+    total_selections: int
+    unique_words: int
+    total_sentences: int
+    average_sentence_length: float
+    top_words: list[TopWordOut]
+    emotion_counts: dict[str, int]
+    recent_sentences: list[str]
+    insight: str
+
+
+class BadgeOut(BaseModel):
+    key: str
+    title: str
+    earned: bool
+    description: str
+
+
+class RewardsData(BaseModel):
+    baby_id: int
+    reward_enabled: bool
+    points: int
+    level: int
+    badges: list[BadgeOut]
 
 
 class SuggestWordsRequest(BaseModel):

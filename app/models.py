@@ -22,6 +22,7 @@ class BabyBasicInformation(Base):
     baby_cards = relationship("BabyCard", back_populates="baby")
     vocab_logs = relationship("BabyVocabLog", back_populates="baby")
     sentences = relationship("SentenceMaster", back_populates="baby")
+    app_settings = relationship("BabyAppSettings", back_populates="baby", uselist=False)
 
 
 class CardMaster(Base):
@@ -171,3 +172,25 @@ class SentenceMaster(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), nullable=False)
 
     baby = relationship("BabyBasicInformation", back_populates="sentences")
+
+
+class BabyAppSettings(Base):
+    __tablename__ = "baby_app_settings"
+
+    baby_id: Mapped[int] = mapped_column(
+        ForeignKey("baby_basic_information.baby_id"), primary_key=True, index=True
+    )
+    parent_pin: Mapped[Optional[str]] = mapped_column(String(20), nullable=True)
+    tts_voice: Mapped[str] = mapped_column(String(50), default="nara", nullable=False)
+    tts_speed: Mapped[float] = mapped_column(Float, default=1.0, nullable=False)
+    reward_enabled: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
+    communication_level: Mapped[Optional[str]] = mapped_column(String(50), nullable=True)
+    favorite_topics: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    sensory_notes: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    avatar_name: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False
+    )
+
+    baby = relationship("BabyBasicInformation", back_populates="app_settings")
