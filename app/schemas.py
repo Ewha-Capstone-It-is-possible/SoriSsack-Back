@@ -189,6 +189,10 @@ class ReportSummaryData(BaseModel):
     emotion_counts: dict[str, int]
     recent_sentences: list[str]
     insight: str
+    # 그래프 이미지 URL (프론트는 차트 안 그리고 이미지로 띄움)
+    words_chart_url: Optional[str] = None
+    emotion_chart_url: Optional[str] = None
+    category_chart_url: Optional[str] = None
 
 
 class EmotionDiaryData(BaseModel):

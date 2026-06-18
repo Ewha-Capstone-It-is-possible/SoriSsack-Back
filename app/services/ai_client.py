@@ -108,6 +108,23 @@ async def fetch_report_insight(stats: dict) -> Optional[str]:
         return None
 
 
+async def fetch_report_charts(baby_id: int, stats: dict) -> dict:
+    """리포트 통계 → 그래프 이미지 URL 모음. 실패하면 {}."""
+    if settings.use_mock_ai:
+        return {}
+    try:
+        async with httpx.AsyncClient(timeout=_AI_TIMEOUT) as client:
+            r = await client.post(
+                f"{settings.ai_server_url}/report/charts",
+                json={"baby_id": baby_id, "stats": stats},
+            )
+            r.raise_for_status()
+            return r.json() or {}
+    except Exception as exc:
+        logger.warning("AI /report/charts 호출 실패: %s", exc)
+        return {}
+
+
 async def fetch_emotion_diary(payload: dict) -> Optional[dict]:
     """그날 사용 기록 → 감정일기 {mood, diary}. 실패하면 None."""
     if settings.use_mock_ai:

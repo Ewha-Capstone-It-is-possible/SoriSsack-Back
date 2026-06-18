@@ -12,7 +12,11 @@ from app.schemas import (
     SuccessResponse,
     TopWordOut,
 )
-from app.services.ai_client import fetch_emotion_diary, fetch_report_insight
+from app.services.ai_client import (
+    fetch_emotion_diary,
+    fetch_report_charts,
+    fetch_report_insight,
+)
 
 
 router = APIRouter(prefix="/reports", tags=["reports"])
@@ -163,6 +167,12 @@ async def get_report(
     gpt_insight = await fetch_report_insight(stats)
     if gpt_insight:
         report.insight = gpt_insight
+
+    # 그래프 이미지(PNG) 생성 → URL (프론트는 이미지로 띄우기만)
+    chart_urls = await fetch_report_charts(baby_id, stats)
+    report.words_chart_url = chart_urls.get("words_chart_url")
+    report.emotion_chart_url = chart_urls.get("emotion_chart_url")
+    report.category_chart_url = chart_urls.get("category_chart_url")
 
     return SuccessResponse(
         data=report,
